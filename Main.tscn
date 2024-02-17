@@ -1,9 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmg1ca2s3d5gr"]
+[gd_scene load_steps=4 format=3 uid="uid://cmad46vkfo8jg"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
+[ext_resource type="Script" path="res://ProgressBar.gd" id="2_wyxhy"]
+[ext_resource type="Script" path="res://Money.gd" id="3_sexvi"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_d1f3b")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Happiness" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 45.0
+offset_top = 41.0
+offset_right = 344.0
+offset_bottom = 68.0
+value = 100.0
+show_percentage = false
+script = ExtResource("2_wyxhy")
+
+[node name="Label" type="Label" parent="CanvasLayer/Happiness"]
+offset_left = 100.0
+offset_top = -25.0
+offset_right = 181.0
+offset_bottom = -2.0
+text = "Happiness"
+
+[node name="Money" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 787.0
+offset_top = 42.0
+offset_right = 1097.0
+offset_bottom = 73.0
+value = 100.0
+show_percentage = false
+script = ExtResource("3_sexvi")
+
+[node name="Label" type="Label" parent="CanvasLayer/Money"]
+layout_mode = 0
+offset_left = 124.0
+offset_top = -26.0
+offset_right = 175.0
+offset_bottom = -3.0
+text = "Profits"
 
 [node name="Button" type="Button" parent="."]
 offset_left = 322.0

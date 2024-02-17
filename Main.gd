@@ -36,6 +36,8 @@ func createRandomPerson():
 
 	return [p1, p2]
 
+var happiness = 33.33
+var money = 10
 
 func _on_button_pressed():
 	
