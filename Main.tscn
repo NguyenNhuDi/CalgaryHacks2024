@@ -108,4 +108,5 @@ text = "X"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="ShowPop" to="Control" method="_on_show_pop_pressed"]
+[connection signal="pressed" from="Control/Choose1" to="." method="_on_choose_1_pressed"]
 [connection signal="pressed" from="Control/Exit" to="Control" method="_on_exit_pressed"]
