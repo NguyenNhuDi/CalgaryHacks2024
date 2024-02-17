@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmad46vkfo8jg"]
+[gd_scene load_steps=5 format=3 uid="uid://cmad46vkfo8jg"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
 [ext_resource type="Script" path="res://ProgressBar.gd" id="2_wyxhy"]
 [ext_resource type="Script" path="res://Money.gd" id="3_sexvi"]
+[ext_resource type="Script" path="res://Control.gd" id="4_6brmf"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_d1f3b")
@@ -51,3 +52,64 @@ offset_bottom = 314.0
 text = "Gen person"
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+=======
+[node name="ShowPop" type="Button" parent="."]
+offset_left = 1058.0
+offset_top = 334.0
+offset_right = 1114.0
+offset_bottom = 387.0
+text = "show"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 217.0
+offset_top = 94.0
+offset_right = 919.0
+offset_bottom = 612.0
+script = ExtResource("4_6brmf")
+
+[node name="Person1" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 99.0
+offset_right = 326.0
+offset_bottom = 273.0
+text = "Person1"
+
+[node name="Person2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 426.0
+offset_top = 98.0
+offset_right = 677.0
+offset_bottom = 272.0
+text = "Person2"
+
+[node name="Choose1" type="Button" parent="Control"]
+offset_left = 73.0
+offset_top = 411.0
+offset_right = 279.0
+offset_bottom = 474.0
+text = "Choose this person"
+
+[node name="Choose2" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 419.0
+offset_top = 409.0
+offset_right = 625.0
+offset_bottom = 472.0
+text = "Choose this person"
+
+[node name="Exit" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 1.0
+offset_right = 704.0
+offset_bottom = 54.0
+text = "X"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ShowPop" to="Control" method="_on_show_pop_pressed"]
+[connection signal="pressed" from="Control/Choose1" to="." method="_on_choose_1_pressed"]
+[connection signal="pressed" from="Control/Exit" to="Control" method="_on_exit_pressed"]
+
