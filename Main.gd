@@ -92,6 +92,6 @@ func _ready():
 	print("Person in room_2:")
 	print(rooms["room_2"].pName)
 	
-	remove_person_in_room("room_10")
+	##remove_person_in_room("room_10")
 	
 		
