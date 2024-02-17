@@ -92,3 +92,12 @@ func _on_show_pop_pressed():
 	# Change the text displayed by the Label
 	Person2.text = "P2 attributes:\n" + "Name: " + two_people[1].pName + "\nAge: " + str(two_people[1].age) + "\nIncome: " + str(two_people[1].income) + "\nHappiness: " + str(two_people[1].happiness)
 
+
+
+func _on_play_pressed():
+	var game_scene_path = "res://Main.tscn"
+	get_tree().change_scene_to_file(game_scene_path)
+
+
+func _on_quit_pressed():
+	get_tree().quit()
