@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmg1ca2s3d5gr"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_d1f3b")
+
+[node name="Hello World" type="Button" parent="."]
+offset_left = 210.0
+offset_top = 182.0
+offset_right = 514.0
+offset_bottom = 454.0
+text = "Hello World!"
+
+[node name="b2 is handsome" type="Button" parent="."]
+offset_left = 715.0
+offset_top = 262.0
+offset_right = 1022.0
+offset_bottom = 360.0
+text = "B2 is cute <3
+"
+
+[connection signal="pressed" from="Hello World" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Hello World" to="." method="_on_hello_world_pressed"]
+[connection signal="pressed" from="b2 is handsome" to="." method="_on_b_2_is_handsome_pressed"]
