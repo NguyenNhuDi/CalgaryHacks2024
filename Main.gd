@@ -10,6 +10,8 @@ var ages = [13, 34, 45, 66, 21, 25, 66, 99, 101230, 3, 5, 3434]
 var incomes = [2333, 21, 4544, 5666, 909, 4343, 959, 333]
 var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
 
+var names_used = []
+
 var elapsed_time = 0
 # TODO undo 100s wait time
 const DURATION = 10 # duration between popups
@@ -19,7 +21,7 @@ var dayOverWaitTime = 5
 var daily_quota = 1000 # can change, plus is updated dynamically in check_actions...????
 
 var rooms = {}
-var fPerson = Person_Obj.new("null", -1, -1, 0)
+#var fPerson = GameState.get_fake_person()
 
 var room1coord = [340, 485, 220]
 var room2coord = [340, 485, 350]
@@ -27,6 +29,7 @@ var room3coord = [340, 485, 478]
 var room4coord = [655, 805, 220]
 var room5coord = [655, 805, 350]
 var room6coord = [655, 805, 478]
+
 
 func _process(delta):
 	if popup_open == false: # start timer when the popup is not open
@@ -42,8 +45,8 @@ func _process(delta):
 	
 	#Assuming 6 rooms
 	for room in rooms.keys():
-
-		if(rooms[room] != fPerson):
+		
+		if(rooms[room] != GameState.get_fake_person()):
 			var personInRoom = rooms[room]
 			var name_index = names.find(personInRoom.pName)
 			var personSprite = $Node2D.get_child(name_index)
@@ -137,11 +140,19 @@ func createRandomPerson():
 	var happinesses_copy = happinesses.duplicate()
 	
 	var rand_name1 = names_copy.pop_at(randi_range(0, len(names_copy) - 1))
+	
+	while rand_name1 in names_used:
+		rand_name1 = names_copy.pop_at(randi_range(0, len(names_copy) - 1))
+	
 	var rand_age1 = ages_copy.pop_at(randi_range(0, len(ages_copy) - 1))
 	var rand_income1 = incomes_copy.pop_at(randi_range(0, len(incomes_copy) - 1))
 	var rand_happiness1 = happinesses_copy.pop_at(randi_range(0, len(happinesses_copy) - 1))
 	
 	var rand_name2 = names_copy.pop_at(randi_range(0, len(names_copy) - 1))
+	
+	while rand_name2 in names_used:
+		rand_name2 = names_copy.pop_at(randi_range(0, len(names_copy) - 1))
+		
 	var rand_age2 = ages_copy.pop_at(randi_range(0, len(ages_copy) - 1))
 	var rand_income2 = incomes_copy.pop_at(randi_range(0, len(incomes_copy) - 1))
 	var rand_happiness2 = happinesses_copy.pop_at(randi_range(0, len(happinesses_copy) - 1))
@@ -165,22 +176,35 @@ func store_person_in_room(person:Person, room:String):
 	
 	rooms[room] = person
 	person.rName = room
+	
+	GameState.store_rooms(person, room)
 
 func remove_person_in_room(room:String):
 	assert(room in rooms, "%s not in rooms" % [room])
-	rooms[room] = fPerson
+	rooms[room] = GameState.get_fake_person()
+	GameState.store_rooms(GameState.get_fake_person(), room)
 
 func _ready():
+
 	var lControl = $DisplayRoomLeft_Control
 	var rControl = $DisplayRoomRight_Control
 	lControl.visible = false
 	rControl.visible = false
 	
-	
-	# initialize rooms:
-	for i in range(6):
-		var rName = "room_%d" % [i+1]
-		rooms[rName] = fPerson
+	if GameState.firstDay:
+		rooms = GameState.init_rooms()	
+	else:
+		rooms = GameState.get_rooms()
+		names_used = []
+		
+		for room in rooms:
+			var person = rooms[room]
+			if person == GameState.get_fake_person():
+				continue
+			person.mDir = 1
+			names_used.append(person.pName)
+			spawnSprite(person, room)
+
 		
 	set_process(true)
 	
@@ -201,24 +225,22 @@ func _on_show_pop_pressed():
 		rRoom = unoccupied_rooms[randi() % unoccupied_rooms.size()]
 		
 	if rRoom == "null":
+		popup_open = false		
 		print("No unoccupied rooms available.")
-		control.visble = false
+		control = $PopUpPeople
+		control.visible = false
+	else:
+		whichRoom = rRoom
 		
-	whichRoom = rRoom
-	
-	var Person1 = $PopUpPeople/Person1
+		var Person1 = $PopUpPeople/Person1
+		Person1.text = "P1 attributes:\n" + "Name: " + two_people[0].pName + "\nAge: " + str(two_people[0].age) + "\nIncome: " + str(two_people[0].income) + "\nHappiness: " + str(two_people[0].happiness) + "\nRoom: " + str(rRoom[-1])
+		
+		var Person2 = $PopUpPeople/Person2
+		Person2.text = "P2 attributes:\n" + "Name: " + two_people[1].pName + "\nAge: " + str(two_people[1].age) + "\nIncome: " + str(two_people[1].income) + "\nHappiness: " + str(two_people[1].happiness) + "\nRoom: " + str(rRoom[-1])
 
-	Person1.text = "P1 attributes:\n" + "Name: " + two_people[0].pName + "\nAge: " + str(two_people[0].age) + "\nIncome: " + str(two_people[0].income) + "\nHappiness: " + str(two_people[0].happiness) + "\nRoom: " + str(rRoom[-1])
-
-	
-	var Person2 = $PopUpPeople/Person2
-	Person2.text = "P2 attributes:\n" + "Name: " + two_people[1].pName + "\nAge: " + str(two_people[1].age) + "\nIncome: " + str(two_people[1].income) + "\nHappiness: " + str(two_people[1].happiness) + "\nRoom: " + str(rRoom[-1])
-	
-
-	
-	p1 = two_people[0]
-	p2 = two_people[1]
-	
+		p1 = two_people[0]
+		p2 = two_people[1]
+		
 	
 
 func _on_exit_pressed():
@@ -234,7 +256,7 @@ func update_averages():
 	var num_persons = 0
 
 	for room in rooms.values():
-		if room != fPerson:  # Assuming fPerson is your 'empty' person
+		if room != GameState.get_fake_person():  # Assuming GameState is you.fPerson 'empty' person
 			total_happiness += room.happiness
 			total_money += room.income
 			num_persons += 1
@@ -276,12 +298,6 @@ func check_game_over_state(): # returns treu if game over
 		
 	return false
 
-
-	
-	
-	
-	
-
 func _on_choose_1_pressed():
 
 	action_count+= 1
@@ -309,7 +325,7 @@ func _on_choose_2_pressed():
 func get_unoccupied_rooms():
 	var unoccupied = []
 	for room_name in rooms.keys():
-		if rooms[room_name] == fPerson:
+		if rooms[room_name] == GameState.get_fake_person():
 			unoccupied.append(room_name)
 	return unoccupied
 	
@@ -438,7 +454,9 @@ func _on_evict_left_pressed():
 	
 	var personName = rooms[rName].pName
 	
-	rooms[rName] = fPerson
+	names_used.erase(personName)
+	
+	rooms[rName] = GameState.get_fake_person()
 	var name_index = names.find(personName)
 	var personSprite = $Node2D.get_child(name_index)
 	personSprite.visible = false
@@ -449,8 +467,9 @@ func _on_evict_right_pressed():
 	var rName = "room_%s" %[rNum]
 	
 	var personName = rooms[rName].pName
+	names_used.erase(personName)
 	
-	rooms[rName] = fPerson
+	rooms[rName] = GameState.get_fake_person()
 	var name_index = names.find(personName)
 	var personSprite = $Node2D.get_child(name_index)
 	personSprite.visible = false
@@ -478,6 +497,7 @@ func check_actions_and_switch_scene():
 
 
 func _on_timer_timeout():
+	GameState.firstDay = false
 	get_tree().change_scene_to_file("res://new_day.tscn")
 	# In Godot 4.0, you might not need to manually remove the Timer node if it's one_shot and auto-free on timeout is set
 
