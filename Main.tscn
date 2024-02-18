@@ -950,7 +950,7 @@ offset_right = 829.0
 offset_bottom = 612.0
 script = SubResource("GDScript_4ykdy")
 
-[node name="Panel" type="Panel" parent="PopUpPeople"]
+[node name="MiddlePannel" type="Panel" parent="PopUpPeople"]
 modulate = Color(0.423529, 0.427451, 0.0745098, 1)
 self_modulate = Color(0, 0.219608, 0.152941, 1)
 material = SubResource("CanvasItemMaterial_fdf46")
@@ -1050,7 +1050,7 @@ offset_top = 103.0
 offset_right = 314.0
 offset_bottom = 488.0
 
-[node name="Panel" type="Panel" parent="DisplayRoomLeft_Control"]
+[node name="DisplayLeftPanel" type="Panel" parent="DisplayRoomLeft_Control"]
 layout_mode = 0
 offset_left = -33.0
 offset_top = -34.0
@@ -1082,7 +1082,7 @@ offset_top = 103.0
 offset_right = 1009.0
 offset_bottom = 501.0
 
-[node name="Panel" type="Panel" parent="DisplayRoomRight_Control"]
+[node name="DisplayRightPanel" type="Panel" parent="DisplayRoomRight_Control"]
 layout_mode = 0
 offset_left = -33.0
 offset_top = -34.0
