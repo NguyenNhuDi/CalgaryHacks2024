@@ -146,14 +146,6 @@ func _on_exit_pressed():
 	control.visible = false
 
 
-
-func _on_choose_2_pressed():
-	
-	store_person_in_room(p2, "room_2")
-	popup_open = false
-	_on_exit_pressed()
-
-
 func _on_room_1_pressed():
 	var r1 = "room_1"
 	var person = rooms[r1]
@@ -190,10 +182,33 @@ func update_averages():
 
 
 func _on_choose_1_pressed():
-	store_person_in_room(p1, "room_1")
-	popup_open = false
-	_on_exit_pressed()
+	var unoccupied_rooms = get_unoccupied_rooms()
+	if unoccupied_rooms.size() > 0:
+		var random_room = unoccupied_rooms[randi() % unoccupied_rooms.size()]
+		store_person_in_room(p1, random_room)
+		popup_open = false
+		update_averages()  # Recalculate averages if necessary
+		_on_exit_pressed()
+	else:
+		print("No unoccupied rooms available.")
+		
+func _on_choose_2_pressed():
+	var unoccupied_rooms = get_unoccupied_rooms()
+	if unoccupied_rooms.size() > 0:
+		var random_room = unoccupied_rooms[randi() % unoccupied_rooms.size()]
+		store_person_in_room(p2, random_room)
+		popup_open = false
+		update_averages()  # Recalculate averages if necessary
+		_on_exit_pressed()
+	else:
+		print("No unoccupied rooms available.")	
+
+func get_unoccupied_rooms():
+	var unoccupied = []
+	for room_name in rooms.keys():
+		if rooms[room_name] == fPerson:
+			unoccupied.append(room_name)
+	return unoccupied
 	
-
-
+	
 
