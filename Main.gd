@@ -2,8 +2,9 @@ extends Node2D
 var Person_Obj = preload("res://Person_Obj.gd")
 
 
-var name_path = {"Bartu": "res://assets/Characters/tile000.png", "Di":"res://assets/Characters/tile001.png", "Brett":"res://assets/Characters/tile002.png", "Taylor":"res://assets/Characters/tile003.png", "Lucy":"res://assets/Characters/tile005.png", "Emma":"res://assets/Characters/tile007.png", "Liam":"res://assets/Characters/tile004.png", "Olivia":"res://assets/Characters/tile016.png", "Noah": "res://assets/Characters/tile006.png", "Ava": "res://assets/Characters/tile019.png", "William": "res://assets/Characters/tile008.png", "James": "res://assets/Characters/tile009.png", "Benjamin": "res://assets/Characters/tile010.png", "Elijah": "res://assets/Characters/tile011.png", "Lucas": "res://assets/Characters/tile012.png", "Andrew": "res://assets/Characters/tile013.png", "Joshua": "res://assets/Characters/tile014.png", "Nicholas": "res://assets/Characters/tile015.png", "Ryan": "res://assets/Characters/tile017.png", "Tyler": "res://assets/Characters/tile018.png"}
-var names = ["Bartu", "Di", "Brett", "Taylor", "Lucy", "Emma", "Liam", "Olivia", "Noah", "Ava", "William", "James", "Benjamin", "Elijah", "Lucas", "Andrew", "Joshua", "Nicholas", "Ryan", "Tyler"]
+var name_path = {"Bartu": "res://assets/Characters/tile000.png", "Di":"res://assets/Characters/tile001.png", "Brett":"res://assets/Characters/tile002.png", "Taylor":"res://assets/Characters/tile003.png", "Lucy":"res://assets/Characters/tile005.png", "Emma":"res://assets/Characters/tile007.png", "Liam":"res://assets/Characters/tile004.png", "Olivia":"res://assets/Characters/tile016.png", "Noah": "res://assets/Characters/tile006.png", "Ava": "res://assets/Characters/tile019.png", "William": "res://assets/Characters/tile008.png", "James": "res://assets/Characters/tile009.png", "Benjamin": "res://assets/Characters/tile010.png", "Elijah": "res://assets/Characters/tile011.png", "Andrew": "res://assets/Characters/tile013.png", "Joshua": "res://assets/Characters/tile014.png", "Nicholas": "res://assets/Characters/tile015.png", "Ryan": "res://assets/Characters/tile017.png", "Tyler": "res://assets/Characters/tile018.png"}
+var profileName_path = {"Bartu": "res://assets/PortraitsFinal/Luimberjack.png", "Di":"res://assets/PortraitsFinal/old_man.png", "Brett":"res://assets/PortraitsFinal/Boy.png", "Taylor":"res://assets/PortraitsFinal/Girl.png", "Lucy":"res://assets/PortraitsFinal/Glasses.png", "Emma":"res://assets/PortraitsFinal/Lady.png", "Liam":"res://assets/PortraitsFinal/old_man2.png", "Olivia":"res://assets/PortraitsFinal/Lady2.png", "Noah": "res://assets/PortraitsFinal/Punk.png", "Ava": "res://assets/PortraitsFinal/FarmerBoy.png", "William": "res://assets/PortraitsFinal/Goblin.png", "James": "res://assets/PortraitsFinal/Knight.png", "Benjamin": "res://assets/PortraitsFinal/Viking.png", "Elijah": "res://assets/PortraitsFinal/Wizard2.png", "Andrew": "res://assets/PortraitsFinal/Detective.png", "Joshua": "res://assets/PortraitsFinal/Girl2.png", "Nicholas": "res://assets/PortraitsFinal/Boy2.png", "Ryan": "res://assets/PortraitsFinal/Kid1.png", "Tyler": "res://assets/PortraitsFinal/Kid2.png"}
+var names = ["Bartu", "Di", "Brett", "Taylor", "Joshua", "Emma", "Liam", "Olivia", "Noah", "Ava", "William", "James", "Benjamin", "Elijah", "Andrew", "Lucy", "Nicholas", "Ryan", "Tyler"]
 
 var ages = [13, 34, 45, 66, 21, 25, 66, 99, 101230, 3, 5, 3434]
 var incomes = [2333, 21, 4544, 5666, 909, 4343, 959, 333]
@@ -308,20 +309,8 @@ func _on_choose_1_pressed():
 
 	action_count+= 1
 	store_person_in_room(p1, whichRoom)
+	spawnSprite(p1, whichRoom)
 	popup_open = false
-	var path = name_path[p1.pName]
-	#var path = preload(texture)
-	var texture = load(path)
-
-	# Create a Sprite2D node and set the texture
-	var sprite = Sprite2D.new()
-	sprite.texture = texture
-#
-	## Hard code the position for the sprite
-	sprite.position = Vector2(100, 100)  # Adjust the position as needed
-#
-	## Add the sprite as a child of the current node (assuming this script is attached to a node)
-	add_child(sprite)
 	
 	update_averages()  
 	var control = $PopUpPeople # exit
@@ -332,20 +321,9 @@ func _on_choose_1_pressed():
 func _on_choose_2_pressed():
 	action_count+= 1
 	store_person_in_room(p2, whichRoom)
-
+	spawnSprite(p2, whichRoom)
 	popup_open = false
-	var path = name_path[p2.pName]
-	var texture = load(path)
-
-	# Create a Sprite2D node and set the texture
-	var sprite = Sprite2D.new()
-	sprite.texture = texture
-
-	# Hard code the position for the sprite
-	sprite.position = Vector2(100, 100)  # Adjust the position as needed
-
-	# Add the sprite as a child of the current node (assuming this script is attached to a node)
-	add_child(sprite)
+	
 	update_averages() 
 	var control = $PopUpPeople # exit
 	control.visible = false
