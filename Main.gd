@@ -189,19 +189,18 @@ func _on_choose_1_pressed():
 		store_person_in_room(p1, random_room)
 		popup_open = false
 		var texture = name_path[p1.pName]
-		print(texture)
-		#var path = preload(texture)
+		var path = preload(texture)
 		#var texture = preload("res://assets/Characters/tile001.png")
-#
-		## Create a Sprite2D node and set the texture
-		#var sprite = Sprite2D.new()
-		#sprite.texture = texture
-#
-		## Hard code the position for the sprite
-		#sprite.position = Vector2(100, 100)  # Adjust the position as needed
+
+		# Create a Sprite2D node and set the texture
+		var sprite = Sprite2D.new()
+		sprite.texture = texture
+
+		# Hard code the position for the sprite
+		sprite.position = Vector2(100, 100)  # Adjust the position as needed
 
 		# Add the sprite as a child of the current node (assuming this script is attached to a node)
-		#add_child(sprite)
+		add_child(sprite)
 		
 		update_averages()  
 		_on_exit_pressed()
@@ -216,7 +215,19 @@ func _on_choose_2_pressed():
 		store_person_in_room(p2, random_room)
 	
 		popup_open = false
+		var texture = name_path[p2.pName]
+		var path = preload(texture)
+		#var texture = preload("res://assets/Characters/tile001.png")
 
+		# Create a Sprite2D node and set the texture
+		var sprite = Sprite2D.new()
+		sprite.texture = texture
+
+		# Hard code the position for the sprite
+		sprite.position = Vector2(100, 100)  # Adjust the position as needed
+
+		# Add the sprite as a child of the current node (assuming this script is attached to a node)
+		add_child(sprite)
 		update_averages() 
 		_on_exit_pressed()
 	else:
