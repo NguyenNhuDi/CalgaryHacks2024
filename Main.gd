@@ -11,7 +11,7 @@ var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
 
 var elapsed_time = 0
 # TODO undo 100s wait time
-const DURATION = 5 # duration between popups
+const DURATION = 1 # duration between popups
 var popup_open = false
 
 var daily_quota = 1000 # can change, plus is updated dynamically in check_actions...????
@@ -92,6 +92,7 @@ func _ready():
 	
 var p1 :Person
 var p2 :Person
+var whichRoom :String
 func _on_show_pop_pressed():
 	popup_open = true
 	var control = $PopUpPeople
@@ -100,11 +101,26 @@ func _on_show_pop_pressed():
 	
 	var two_people = createRandomPerson()
 	
+	var unoccupied_rooms = get_unoccupied_rooms()
+	var rRoom = "null"
+	if unoccupied_rooms.size() > 0:
+		rRoom = unoccupied_rooms[randi() % unoccupied_rooms.size()]
+		
+	if rRoom == "null":
+		print("No unoccupied rooms available.")
+		control.visble = false
+		
+	whichRoom = rRoom
+	
 	var Person1 = $PopUpPeople/Person1
-	Person1.text = "P1 attributes:\n" + "Name: " + two_people[0].pName + "\nAge: " + str(two_people[0].age) + "\nIncome: " + str(two_people[0].income) + "\nHappiness: " + str(two_people[0].happiness)
+
+	Person1.text = "P1 attributes:\n" + "Name: " + two_people[0].pName + "\nAge: " + str(two_people[0].age) + "\nIncome: " + str(two_people[0].income) + "\nHappiness: " + str(two_people[0].happiness) + "\nRoom: " + str(rRoom[-1])
+
 	
 	var Person2 = $PopUpPeople/Person2
-	Person2.text = "P2 attributes:\n" + "Name: " + two_people[1].pName + "\nAge: " + str(two_people[1].age) + "\nIncome: " + str(two_people[1].income) + "\nHappiness: " + str(two_people[1].happiness)
+	Person2.text = "P2 attributes:\n" + "Name: " + two_people[1].pName + "\nAge: " + str(two_people[1].age) + "\nIncome: " + str(two_people[1].income) + "\nHappiness: " + str(two_people[1].happiness) + "\nRoom: " + str(rRoom[-1])
+	
+
 	
 	p1 = two_people[0]
 	p2 = two_people[1]
@@ -168,58 +184,51 @@ func check_game_over_state(): # returns treu if game over
 	return false
 
 func _on_choose_1_pressed():
-	var unoccupied_rooms = get_unoccupied_rooms()
-	if unoccupied_rooms.size() > 0:
-		action_count+= 1
-		var random_room = unoccupied_rooms[randi() % unoccupied_rooms.size()]
-		store_person_in_room(p1, random_room)
-		popup_open = false
-		var path = name_path[p1.pName]
-		#var path = preload(texture)
-		var texture = load(path)
 
-		# Create a Sprite2D node and set the texture
-		var sprite = Sprite2D.new()
-		sprite.texture = texture
+	action_count+= 1
+	store_person_in_room(p1, whichRoom)
+	popup_open = false
+	var path = name_path[p1.pName]
+	#var path = preload(texture)
+	var texture = load(path)
+
+	# Create a Sprite2D node and set the texture
+	var sprite = Sprite2D.new()
+	sprite.texture = texture
 #
-		## Hard code the position for the sprite
-		sprite.position = Vector2(100, 100)  # Adjust the position as needed
+	## Hard code the position for the sprite
+	sprite.position = Vector2(100, 100)  # Adjust the position as needed
 #
-		## Add the sprite as a child of the current node (assuming this script is attached to a node)
-		add_child(sprite)
-		
-		update_averages()  
-		var control = $PopUpPeople # exit
-		control.visible = false
-	else:
-		print("No unoccupied rooms available.")
+	## Add the sprite as a child of the current node (assuming this script is attached to a node)
+	add_child(sprite)
+	
+	update_averages()  
+	var control = $PopUpPeople # exit
+	control.visible = false
+
 
 		
 func _on_choose_2_pressed():
-	var unoccupied_rooms = get_unoccupied_rooms()
-	if unoccupied_rooms.size() > 0:
-		action_count+= 1
-		var random_room = unoccupied_rooms[randi() % unoccupied_rooms.size()]
-		store_person_in_room(p2, random_room)
-	
-		popup_open = false
-		var path = name_path[p2.pName]
-		var texture = load(path)
+	action_count+= 1
+	store_person_in_room(p2, whichRoom)
 
-		# Create a Sprite2D node and set the texture
-		var sprite = Sprite2D.new()
-		sprite.texture = texture
+	popup_open = false
+	var path = name_path[p2.pName]
+	var texture = load(path)
 
-		# Hard code the position for the sprite
-		sprite.position = Vector2(100, 100)  # Adjust the position as needed
+	# Create a Sprite2D node and set the texture
+	var sprite = Sprite2D.new()
+	sprite.texture = texture
 
-		# Add the sprite as a child of the current node (assuming this script is attached to a node)
-		add_child(sprite)
-		update_averages() 
-		var control = $PopUpPeople # exit
-		control.visible = false
-	else:
-		print("No unoccupied rooms available.")	
+	# Hard code the position for the sprite
+	sprite.position = Vector2(100, 100)  # Adjust the position as needed
+
+	# Add the sprite as a child of the current node (assuming this script is attached to a node)
+	add_child(sprite)
+	update_averages() 
+	var control = $PopUpPeople # exit
+	control.visible = false
+
 
 func get_unoccupied_rooms():
 	var unoccupied = []
