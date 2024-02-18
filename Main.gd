@@ -96,10 +96,6 @@ func _ready():
 		var rName = "room_%d" % [i]
 		rooms[rName] = fPerson
 	
-	if GameState.action_count > 3:
-		# Reset action count for a new day or handle as necessary
-		GameState.update_action_count(0)
-		# Update scene or UI based on the new game state
 	
 var p1 :Person
 var p2 :Person
@@ -134,14 +130,13 @@ func _on_room_1_pressed():
 	print("Name: ", person.pName)
 	
 
+var avg_happiness = GameState.get_happiness()
+var avg_money = GameState.get_money()
+
 func update_averages():
 	var total_happiness = 0.0
 	var total_money = 0
 	var num_persons = 0
-
-	# Initialize avg_happiness and avg_money at the beginning
-	var avg_happiness = GameState.get_happiness()
-	var avg_money = GameState.get_money()
 
 	for room in rooms.values():
 		if room != fPerson:  # Assuming fPerson is your 'empty' person
@@ -153,7 +148,7 @@ func update_averages():
 		avg_happiness = total_happiness / num_persons
 		GameState.update_happiness(avg_happiness)  # Update happiness in GameState
 
-		avg_money = total_money / num_persons
+		avg_money = total_money
 		GameState.update_money(avg_money)  # Update money in GameState
 
 	# Retrieve updated values from GameState for use outside the if-else block
@@ -168,7 +163,7 @@ func update_averages():
 	$CanvasLayer/Money.value = money_percentage  # Use calculated percentage
 
 
-	
+	print(avg_money)
 	if happiness < 0.2 || money < 0: # temporary game over condition
 		# game ova
 		game_over()
@@ -236,8 +231,6 @@ func game_over():
 	print("game_over")
 	get_tree().change_scene_to_file("res://game_over_scene.tscn")
 	
-	
-
 
 func _on_display_room_1_pressed():
 	var p = $DisplayRoom1_Control
@@ -258,7 +251,7 @@ func _on_display_room_2_pressed():
 func check_actions_and_switch_scene():
 	if action_count == 3:
 		var timer = Timer.new()
-		timer.wait_time = 10
+		timer.wait_time = 4
 		timer.one_shot = true
 		add_child(timer)
 		# Use Callable for connecting in Godot 4.0

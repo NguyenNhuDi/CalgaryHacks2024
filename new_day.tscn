@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://1d4swic05mgj"]
+[gd_scene load_steps=2 format=3 uid="uid://t403g223wjou"]
 
 [ext_resource type="Script" path="res://new_day.gd" id="1_85t2e"]
 
@@ -19,12 +19,13 @@ color = Color(0.0313726, 0.0745098, 0.0941176, 1)
 
 [node name="TextEdit" type="TextEdit" parent="."]
 layout_mode = 0
-offset_left = 469.0
-offset_top = 90.0
-offset_right = 721.0
-offset_bottom = 161.0
+offset_left = 466.0
+offset_top = 81.0
+offset_right = 718.0
+offset_bottom = 169.0
 theme_override_font_sizes/font_size = 45
 text = "Day Over..."
+editable = false
 
 [node name="NextDay" type="Button" parent="."]
 layout_mode = 0
