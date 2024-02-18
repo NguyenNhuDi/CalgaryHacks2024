@@ -95,7 +95,11 @@ func _ready():
 	for i in range(6):
 		var rName = "room_%d" % [i]
 		rooms[rName] = fPerson
-		
+	
+	if GameState.action_count > 3:
+		# Reset action count for a new day or handle as necessary
+		GameState.update_action_count(0)
+		# Update scene or UI based on the new game state
 	
 var p1 :Person
 var p2 :Person
@@ -142,25 +146,23 @@ func update_averages():
 			num_persons += 1
 
 	if num_persons > 0:
-		happiness = total_happiness / num_persons
-		money = total_money / num_persons
+		var avg_happiness = total_happiness / num_persons
+		GameState.update_happiness(avg_happiness)
+		money = total_money / num_persons  # Consider updating this to use GameState as well
 	else:
-		happiness = happiness
-		money = money
+		# If no persons, consider setting default or maintaining current state
+ 		# happiness = GameState.get_happiness()  # This line might not be necessary
+		money = money  # Consider updating this to use GameState as well
 
+	# Use GameState to get the updated happiness value
+	var updated_happiness = GameState.get_happiness()
 
 	# Update happiness ProgressBar
 	var hBar = $CanvasLayer/Happiness
-	hBar.value = 100 * happiness
+	hBar.value = updated_happiness * 100  # Assuming you want to convert to percentage
 
-	# Update money ProgressBar
-	var mBar = $CanvasLayer/Money
-	# Convert average money to a percentage of 10000 for the ProgressBar
-	var money_percentage = min(money / 1500.0, 100.0)  # Ensuring it doesn't exceed 100%
-	mBar.value = money_percentage
-
-	print("Happiness: ", happiness)
-	print("Money Percentage: ", money_percentage)
+	# Update money ProgressBar as needed
+	# Make sure to adapt this part as well to use GameState for global money tracking
 
 
 	# Optionally, update any UI elements or notify other parts of your game
