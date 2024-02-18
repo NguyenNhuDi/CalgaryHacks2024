@@ -111,16 +111,7 @@ var p2 :Person
 func _on_show_pop_pressed():
 	popup_open = true
 	var control = $PopUpPeople
-	var GenButton = $GenPerson
-	var ShowButton = $ShowPop
 
-	#var BuildingTilemaps = $building_tilemaps
-	#BuildingTilemaps.visible = false
-
-	
-	GenButton.visible = false
-	ShowButton.visible = false	
-	
 	control.visible = true
 	
 	var two_people = createRandomPerson()
@@ -138,11 +129,6 @@ func _on_show_pop_pressed():
 
 func _on_exit_pressed():
 	var control = $PopUpPeople
-	var GenButton = $GenPerson
-	var ShowButton = $ShowPop
-	
-	GenButton.visible = true
-	ShowButton.visible = true	
 	control.visible = false
 
 
