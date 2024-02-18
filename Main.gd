@@ -3,12 +3,14 @@ var Person_Obj = preload("res://Person_Obj.gd")
 
 var names = ["Bartu", "Di", "Brett", "Taylor", "Lucy"]
 var ages = [13, 34, 45, 66, 21, 25, 66, 99, 101230, 3, 5, 3434]
-var incomes = [2333, 21, 4544, 5666, 909, 4343, 95959, 20333]
+var incomes = [2333, 21, 4544, 5666, 909, 4343, 959, 333]
 var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
 
 var elapsed_time = 0
 const DURATION = 5 # duration between popups
 var popup_open = false
+
+var daily_quota = 1000 # can change, plus is updated dynamically in check_actions...????
 
 func _process(delta):
 	if popup_open == false: # start timer when the popup is not open
@@ -148,7 +150,6 @@ func update_averages():
 		happiness = happiness
 		money = money
 
-
 	# Update happiness ProgressBar
 	var hBar = $CanvasLayer/Happiness
 	hBar.value = 100 * happiness
@@ -167,14 +168,22 @@ func update_averages():
 	# For example:
 	# $HappinessBar.value = happiness
 	# $MoneyLabel.text = str(money)
+	if check_game_over_state():
+		game_over()
 	
+	
+	
+func check_game_over_state(): # returns treu if game over
+	print(money)
 	if happiness < 0.2: # temporary game over condition
 		# game ova
 		low_happiness()
 	
 	if money < 0:
-		game_over()
-
+		print("yeahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+		return true
+		
+	return false
 
 func _on_choose_1_pressed():
 	var unoccupied_rooms = get_unoccupied_rooms()
@@ -234,13 +243,15 @@ func displayProfile(profile, pic, label, room_name, on):
 		pic.global_scale.y /= 2
 	
 	return on
+	
 func game_over():
 	print("game_over")
 	get_tree().change_scene_to_file("res://game_over_scene.tscn")
 	
 func low_happiness():
 	# temporary, for future implemet more complex thingy / kick someone out idk
-	game_over()
+	#game_over()
+	pass
 	
 
 func _on_display_room_1_pressed():
@@ -259,5 +270,13 @@ func _on_display_room_2_pressed():
 	p2_on = displayProfile(p, pic, label, "room_2", p2_on)
 
 func check_actions_and_switch_scene():
-	if action_count > 3:
-		get_tree().change_scene_to_file("res://new_day.tscn")
+	if action_count > 3: # switch to a new day
+		# subtract the quota from profit then update the quota 
+		money -= daily_quota
+		
+		daily_quota *= 2 # temporary quota update - change later ??????
+		if !check_game_over_state():
+			get_tree().change_scene_to_file("res://new_day.tscn")
+		else:
+			game_over()
+		
