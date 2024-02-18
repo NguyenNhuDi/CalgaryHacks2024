@@ -18,7 +18,7 @@ func _process(delta):
 		
 	if elapsed_time >= DURATION: # open popup once timer reaches DURATION
 		_on_show_pop_pressed()
-		print("timer called")
+		#print("timer called")
 		elapsed_time = 0
 		
 	update_averages()
@@ -54,29 +54,27 @@ func createRandomPerson():
 	
 	return [p1, p2]
 
-var happiness = 1
-var money = 0
 var action_count = 0
 
 func _on_button_pressed():
 	
 	var two_people = createRandomPerson()
 	
-	print("P1 attributes:")
-	print("Name: ", two_people[0].pName)
-	print("Age: ", two_people[0].age)
-	print("Income: ", two_people[0].income)
-	print("Happiness: ", two_people[0].happiness)
-	
-	print("\n\n\n")
-	
-	print("P2 attributes:")
-	print("Name: ", two_people[1].pName)
-	print("Age: ", two_people[1].age)
-	print("Income: ", two_people[1].income)
-	print("Happiness: ", two_people[1].happiness)
-	
-	print("\n\n\n")
+	#print("P1 attributes:")
+	#print("Name: ", two_people[0].pName)
+	#print("Age: ", two_people[0].age)
+	#print("Income: ", two_people[0].income)
+	#print("Happiness: ", two_people[0].happiness)
+	#
+	#print("\n\n\n")
+	#
+	#print("P2 attributes:")
+	#print("Name: ", two_people[1].pName)
+	#print("Age: ", two_people[1].age)
+	#print("Income: ", two_people[1].income)
+	#print("Happiness: ", two_people[1].happiness)
+	#
+	#print("\n\n\n")
 	
 var rooms = {}
 var fPerson = Person_Obj.new("null", -1, -1, 0)
@@ -133,7 +131,7 @@ func _on_room_1_pressed():
 	var r1 = "room_1"
 	var person = rooms[r1]
 	
-	print("Name: ", person.pName)
+	#print("Name: ", person.pName)
 	
 
 func update_averages():
@@ -169,15 +167,6 @@ func update_averages():
 	$CanvasLayer/Happiness.value = updated_happiness * 100  # Convert to percentage if needed
 	$CanvasLayer/Money.value = money_percentage  # Use calculated percentage
 
-	# Update happiness ProgressBar
-	var hBar = $CanvasLayer/Happiness
-	hBar.value = 100 * happiness
-
-	# Update money ProgressBar
-	var mBar = $CanvasLayer/Money
-	# Convert average money to a percentage of 10000 for the ProgressBar
-	var money_percentage = min(money / 1500.0, 100.0)  # Ensuring it doesn't exceed 100%
-	mBar.value = money_percentage
 
 	#print("Happiness: ", happiness)
 	#print("Money Percentage: ", money_percentage)
@@ -193,13 +182,13 @@ func update_averages():
 	
 	
 func check_game_over_state(): # returns treu if game over
-	print(money)
-	if happiness < 0.2: # temporary game over condition
+	print(GameState.get_money())
+	if GameState.get_happiness() < 0.2: # temporary game over condition
 		# game ova
 		low_happiness()
 	
-	if money < 0:
-		print("yeahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+	if GameState.get_money() < 0:
+		#print("yeahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
 		return true
 		
 	return false
@@ -291,7 +280,7 @@ func _on_display_room_2_pressed():
 func check_actions_and_switch_scene():
 	if action_count > 3: # switch to a new day
 		# subtract the quota from profit then update the quota 
-		money -= daily_quota
+		GameState.update_money(GameState.get_money() - daily_quota)
 		
 		daily_quota *= 2 # temporary quota update - change later ??????
 		if !check_game_over_state():
