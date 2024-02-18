@@ -10,8 +10,6 @@ var ages = [13, 34, 45, 66, 21, 25, 66, 99, 101230, 3, 5, 3434]
 var incomes = [2333, 21, 4544, 5666, 909, 4343, 959, 333]
 var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
 
-var names_used = []
-
 var elapsed_time = 0
 # TODO undo 100s wait time
 const DURATION = 10 # duration between popups
@@ -141,8 +139,14 @@ func createRandomPerson():
 	
 	var rand_name1 = names_copy.pop_at(randi_range(0, len(names_copy) - 1))
 	
-	while rand_name1 in names_used:
-		rand_name1 = names_copy.pop_at(randi_range(0, len(names_copy) - 1))
+	while true:
+		var valid = true
+		for room in rooms:
+			if rand_name1 == rooms[room].pName:
+				rand_name1 = names_copy.pop_at(randi_range(0, len(names_copy) - 1))
+				valid = false
+		if valid:
+			break
 	
 	var rand_age1 = ages_copy.pop_at(randi_range(0, len(ages_copy) - 1))
 	var rand_income1 = incomes_copy.pop_at(randi_range(0, len(incomes_copy) - 1))
@@ -150,8 +154,14 @@ func createRandomPerson():
 	
 	var rand_name2 = names_copy.pop_at(randi_range(0, len(names_copy) - 1))
 	
-	while rand_name2 in names_used:
-		rand_name2 = names_copy.pop_at(randi_range(0, len(names_copy) - 1))
+	while true:
+		var valid = true
+		for room in rooms:
+			if rand_name2 == rooms[room].pName:
+				rand_name2 = names_copy.pop_at(randi_range(0, len(names_copy) - 1))
+				valid = false
+		if valid:
+			break
 		
 	var rand_age2 = ages_copy.pop_at(randi_range(0, len(ages_copy) - 1))
 	var rand_income2 = incomes_copy.pop_at(randi_range(0, len(incomes_copy) - 1))
@@ -195,14 +205,12 @@ func _ready():
 		rooms = GameState.init_rooms()	
 	else:
 		rooms = GameState.get_rooms()
-		names_used = []
 		
 		for room in rooms:
 			var person = rooms[room]
 			if person == GameState.get_fake_person():
 				continue
 			person.mDir = 1
-			names_used.append(person.pName)
 			spawnSprite(person, room)
 
 		
@@ -454,8 +462,6 @@ func _on_evict_left_pressed():
 	
 	var personName = rooms[rName].pName
 	
-	names_used.erase(personName)
-	
 	rooms[rName] = GameState.get_fake_person()
 	var name_index = names.find(personName)
 	var personSprite = $Node2D.get_child(name_index)
@@ -467,7 +473,6 @@ func _on_evict_right_pressed():
 	var rName = "room_%s" %[rNum]
 	
 	var personName = rooms[rName].pName
-	names_used.erase(personName)
 	
 	rooms[rName] = GameState.get_fake_person()
 	var name_index = names.find(personName)
