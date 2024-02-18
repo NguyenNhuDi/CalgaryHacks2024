@@ -11,10 +11,10 @@ const DURATION = 5 # duration between popups
 var popup_open = false
 
 func _process(delta):
-	if popup_open == false:
+	if popup_open == false: # start timer when the popup is not open
 		elapsed_time += delta
 		
-	if elapsed_time >= DURATION:
+	if elapsed_time >= DURATION: # open popup once timer reaches DURATION
 		_on_show_pop_pressed()
 		print("timer called")
 		elapsed_time = 0
@@ -50,7 +50,7 @@ func createRandomPerson():
 	
 	return [p1, p2]
 
-var happiness = 0
+var happiness = 1
 var money = 0
 
 func _on_button_pressed():
@@ -154,17 +154,31 @@ func update_averages():
 		happiness = total_happiness / num_persons
 		money = total_money / num_persons
 	else:
-		happiness = 0
+		happiness = happiness
 		money = 0
-		
+
+	# Update happiness ProgressBar
 	var hBar = $CanvasLayer/Happiness
 	hBar.value = 100 * happiness
-	print(happiness)
+
+	# Update money ProgressBar
+	var mBar = $CanvasLayer/Money
+	# Convert average money to a percentage of 10000 for the ProgressBar
+	var money_percentage = min(money / 1500.0, 100.0)  # Ensuring it doesn't exceed 100%
+	mBar.value = money_percentage
+
+	print("Happiness: ", happiness)
+	print("Money Percentage: ", money_percentage)
+
 
 	# Optionally, update any UI elements or notify other parts of your game
 	# For example:
 	# $HappinessBar.value = happiness
 	# $MoneyLabel.text = str(money)
+	
+	if happiness < 0.2 || money < 0: # temporary game over condition
+		# game ova
+		game_over()
 
 
 func _on_choose_1_pressed():
@@ -223,6 +237,10 @@ func displayProfile(profile, pic, label, room_name, on):
 		pic.global_scale.y /= 2
 	
 	return on
+func game_over():
+	print("game_over")
+	get_tree().change_scene_to_file("res://game_over_scene.tscn")
+	
 	
 
 
