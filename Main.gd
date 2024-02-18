@@ -6,13 +6,15 @@ var profileName_path = {"Bartu": "res://assets/PortraitsFinal/Luimberjack.png", 
 var names = ["Bartu", "Di", "Brett", "Taylor", "Lucy", "Emma", "Liam", "Olivia", "Noah", "Ava", "William", "James", "Benjamin", "Elijah", "Andrew", "Joshua", "Nicholas", "Ryan", "Tyler"]
 
 var ages = [13, 34, 45, 66, 21, 25, 66, 99, 101230, 3, 5, 3434]
-var incomes = [2333, 21, 4544, 5666, 909, 4343, 95959, 20333]
+var incomes = [2333, 21, 4544, 5666, 909, 4343, 959, 333]
 var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
 
 var elapsed_time = 0
 # TODO undo 100s wait time
 const DURATION = 5 # duration between popups
 var popup_open = false
+
+var daily_quota = 1000 # can change, plus is updated dynamically in check_actions...????
 
 func _process(delta):
 	if popup_open == false: # start timer when the popup is not open
@@ -55,10 +57,7 @@ func createRandomPerson():
 	
 	return [p1, p2]
 
-var happiness = 1
-var money = 0
 var action_count = 0
-
 
 	
 var rooms = {}
@@ -116,6 +115,8 @@ func _on_exit_pressed():
 	var control = $PopUpPeople
 	control.visible = false
 	
+var avg_happiness = GameState.get_happiness()
+var avg_money = GameState.get_money()
 
 func update_averages():
 	var total_happiness = 0.0
@@ -129,27 +130,42 @@ func update_averages():
 			num_persons += 1
 
 	if num_persons > 0:
-		happiness = total_happiness / num_persons
-		money = total_money / num_persons
-	else:
-		happiness = happiness
-		money = money
+		avg_happiness = total_happiness / num_persons
+		GameState.update_happiness(avg_happiness)  # Update happiness in GameState
 
+		avg_money = total_money
+		GameState.update_money(avg_money)  # Update money in GameState
 
-	# Update happiness ProgressBar
-	var hBar = $CanvasLayer/Happiness
-	hBar.value = 100 * happiness
+	# Retrieve updated values from GameState for use outside the if-else block
+	var updated_happiness = GameState.get_happiness()
+	var updated_money = GameState.get_money()
 
-	# Update money ProgressBar
-	var mBar = $CanvasLayer/Money
-	# Convert average money to a percentage of 10000 for the ProgressBar
-	var money_percentage = min(money / 1500.0, 100.0)  # Ensuring it doesn't exceed 100%
-	mBar.value = money_percentage
+	# Calculate money as a percentage of 150,000
+	var money_percentage = min((updated_money / 150000.0) * 100, 100)  # Ensure it doesn't exceed 100%
 
-	if happiness < 0.2 || money < 0: # temporary game over condition
-		# game ova
+	# Update UI elements or other game parts with the new values
+	$CanvasLayer/Happiness.value = updated_happiness * 100  # Convert to percentage if needed
+	$CanvasLayer/Money.value = money_percentage  # Use calculated percentage
+
+	# Optionally, update any UI elements or notify other parts of your game
+	# For example:
+	# $HappinessBar.value = happiness
+	# $MoneyLabel.text = str(money)
+	if check_game_over_state():
 		game_over()
-
+	
+	
+	
+func check_game_over_state(): # returns treu if game over
+	print(GameState.get_money())
+	if GameState.get_happiness() < 0.2: # temporary game over condition
+		# game ova
+		low_happiness()
+	
+	if GameState.get_money() < 0:
+		return true
+		
+	return false
 
 func _on_choose_1_pressed():
 	var unoccupied_rooms = get_unoccupied_rooms()
@@ -173,7 +189,8 @@ func _on_choose_1_pressed():
 		add_child(sprite)
 		
 		update_averages()  
-		_on_exit_pressed()
+		var control = $PopUpPeople # exit
+		control.visible = false
 	else:
 		print("No unoccupied rooms available.")
 
@@ -199,7 +216,8 @@ func _on_choose_2_pressed():
 		# Add the sprite as a child of the current node (assuming this script is attached to a node)
 		add_child(sprite)
 		update_averages() 
-		_on_exit_pressed()
+		var control = $PopUpPeople # exit
+		control.visible = false
 	else:
 		print("No unoccupied rooms available.")	
 
@@ -215,6 +233,10 @@ func game_over():
 	print("game_over")
 	get_tree().change_scene_to_file("res://game_over_scene.tscn")
 	
+func low_happiness():
+	# temporary, for future implemet more complex thingy / kick someone out idk
+	#game_over()
+	pass
 	
 
 var leftOn :bool = false
@@ -324,10 +346,6 @@ func _on_display_room_5_pressed():
 func _on_display_room_6_pressed():
 	displayRightProfile("room_6")
 
-func check_actions_and_switch_scene():
-	if action_count > 3:
-		get_tree().change_scene_to_file("res://new_day.tscn")
-
 
 func _on_evict_left_pressed():
 	var rNum = $DisplayRoomLeft_Control/stats.text[6]
@@ -336,4 +354,30 @@ func _on_evict_left_pressed():
 	rooms[rName] = fPerson
 	
 	displayLeftProfile(rName)
-	
+
+
+
+func check_actions_and_switch_scene():
+	if action_count == 3:
+		# subtract the quota from profit then update the quota 
+		avg_money -= daily_quota
+		GameState.update_money(avg_money)
+
+		
+		if !check_game_over_state():
+			var timer = Timer.new()
+			timer.wait_time = 2
+			timer.one_shot = true
+			add_child(timer)
+			# Use Callable for connecting in Godot 4.0
+			timer.connect("timeout", Callable(self, "_on_timer_timeout"))
+			timer.start()
+		else:
+			game_over()
+			GameState.reset_game_state()
+
+
+func _on_timer_timeout():
+	get_tree().change_scene_to_file("res://new_day.tscn")
+	# In Godot 4.0, you might not need to manually remove the Timer node if it's one_shot and auto-free on timeout is set
+
