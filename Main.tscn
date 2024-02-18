@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmg1ca2s3d5gr"]
+[gd_scene load_steps=12 format=3 uid="uid://cmad46vkfo8jg"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
 [ext_resource type="Script" path="res://ProgressBar.gd" id="2_wyxhy"]
@@ -6,82 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://budr4a53fhbkl" path="res://assets/sky_background.jpg" id="4_kafs0"]
 [ext_resource type="Texture2D" uid="uid://bo62tcux5ul8l" path="res://assets/grass_tileset.png" id="5_cb7xc"]
 [ext_resource type="Texture2D" uid="uid://demxptcl3jkul" path="res://assets/PixelSpaces_Free_Pack/PixelSpaces Free Pack.png" id="5_wbucn"]
-
-[sub_resource type="GDScript" id="GDScript_4ykdy"]
-script/source = "extends Control
-
-var Person_Obj = preload(\"res://Person_Obj.gd\")
-var Main = preload(\"res://Main.gd\")
-
-var names = [\"Bartu\", \"Di\", \"Brett\", \"Taylor\", \"Lucy\"]
-var ages = [13, 34, 45, 66, 21, 25, 66, 99, 101230, 3, 5, 3434]
-var incomes = [2333, 21, 4544, 5666, 909, 4343, 95959, 20333]
-var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
-
-	
-var rooms = {}
-var fPerson = Person_Obj.new(\"null\", -1, -1, 0)
-
-# Function to create random people
-func createRandomPerson():
-	var names_copy = names.duplicate()
-	var ages_copy = ages.duplicate()
-	var incomes_copy = incomes.duplicate()
-	var happinesses_copy = happinesses.duplicate()
-	
-	var rand_name1 = names_copy.pop_at(randi_range(0, names_copy.size() - 1))
-	var rand_age1 = ages_copy.pop_at(randi_range(0, ages_copy.size() - 1))
-	var rand_income1 = incomes_copy.pop_at(randi_range(0, incomes_copy.size() - 1))
-	var rand_happiness1 = happinesses_copy.pop_at(randi_range(0, happinesses_copy.size() - 1))
-	
-	var rand_name2 = names_copy.pop_at(randi_range(0, names_copy.size() - 1))
-	var rand_age2 = ages_copy.pop_at(randi_range(0, ages_copy.size() - 1))
-	var rand_income2 = incomes_copy.pop_at(randi_range(0, incomes_copy.size() - 1))
-	var rand_happiness2 = happinesses_copy.pop_at(randi_range(0, happinesses_copy.size() - 1))
-	
-	var p1 = Person_Obj.new(rand_name1, rand_age1, rand_income1, rand_happiness1)  
-	var p2 = Person_Obj.new(rand_name2, rand_age2, rand_income2, rand_happiness2)  
-
-	return [p1, p2]
-
-func _ready():
-	# Hide the pop-up by default
-	print(\"when am i called\")
-	self.visible = false
-	
-
-# Called when the \"Exit\" button is pressed
-func _on_exit_pressed():
-	self.visible = false
-
-# Called when the \"Show Pop-up\" button is pressed
-#func _on_show_pop_pressed():
-	#self.visible = true
-	#
-	#var two_people = createRandomPerson()
-	#
-	#var Person1 = $Person1
-	#Person1.text = \"P1 attributes:\\n\" + \"Name: \" + two_people[0].pName + \"\\nAge: \" + str(two_people[0].age) + \"\\nIncome: \" + str(two_people[0].income) + \"\\nHappiness: \" + str(two_people[0].happiness)
-	#
-	#var Person2 = $Person2
-	#Person2.text = \"P2 attributes:\\n\" + \"Name: \" + two_people[1].pName + \"\\nAge: \" + str(two_people[1].age) + \"\\nIncome: \" + str(two_people[1].income) + \"\\nHappiness: \" + str(two_people[1].happiness)
-
-# Called when the \"Play\" button is pressed
-func _on_play_pressed():
-	var game_scene_path = \"res://Main.tscn\"
-	get_tree().change_scene_to_file(game_scene_path)
-
-# Called when the \"Quit\" button is pressed
-func _on_quit_pressed():
-	get_tree().quit()
-	
-	
-
-func _on_choose_1_pressed(room:String):
-	assert(room in rooms, \"%s not in rooms\" % [room])
-	rooms[room] = fPerson
-
-"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5heni"]
 texture = ExtResource("5_cb7xc")
@@ -846,65 +770,84 @@ texture = ExtResource("5_wbucn")
 [sub_resource type="TileSet" id="TileSet_fgflw"]
 sources/0 = SubResource("TileSetAtlasSource_i26cf")
 
+[sub_resource type="GDScript" id="GDScript_4ykdy"]
+script/source = "extends Control
+
+var Person_Obj = preload(\"res://Person_Obj.gd\")
+var Main = preload(\"res://Main.gd\")
+
+var names = [\"Bartu\", \"Di\", \"Brett\", \"Taylor\", \"Lucy\"]
+var ages = [13, 34, 45, 66, 21, 25, 66, 99, 101230, 3, 5, 3434]
+var incomes = [2333, 21, 4544, 5666, 909, 4343, 95959, 20333]
+var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
+
+	
+var rooms = {}
+var fPerson = Person_Obj.new(\"null\", -1, -1, 0)
+
+# Function to create random people
+func createRandomPerson():
+	var names_copy = names.duplicate()
+	var ages_copy = ages.duplicate()
+	var incomes_copy = incomes.duplicate()
+	var happinesses_copy = happinesses.duplicate()
+	
+	var rand_name1 = names_copy.pop_at(randi_range(0, names_copy.size() - 1))
+	var rand_age1 = ages_copy.pop_at(randi_range(0, ages_copy.size() - 1))
+	var rand_income1 = incomes_copy.pop_at(randi_range(0, incomes_copy.size() - 1))
+	var rand_happiness1 = happinesses_copy.pop_at(randi_range(0, happinesses_copy.size() - 1))
+	
+	var rand_name2 = names_copy.pop_at(randi_range(0, names_copy.size() - 1))
+	var rand_age2 = ages_copy.pop_at(randi_range(0, ages_copy.size() - 1))
+	var rand_income2 = incomes_copy.pop_at(randi_range(0, incomes_copy.size() - 1))
+	var rand_happiness2 = happinesses_copy.pop_at(randi_range(0, happinesses_copy.size() - 1))
+	
+	var p1 = Person_Obj.new(rand_name1, rand_age1, rand_income1, rand_happiness1)  
+	var p2 = Person_Obj.new(rand_name2, rand_age2, rand_income2, rand_happiness2)  
+
+	return [p1, p2]
+
+func _ready():
+	# Hide the pop-up by default
+	print(\"when am i called\")
+	self.visible = false
+	
+
+# Called when the \"Exit\" button is pressed
+func _on_exit_pressed():
+	self.visible = false
+
+# Called when the \"Show Pop-up\" button is pressed
+#func _on_show_pop_pressed():
+	#self.visible = true
+	#
+	#var two_people = createRandomPerson()
+	#
+	#var Person1 = $Person1
+	#Person1.text = \"P1 attributes:\\n\" + \"Name: \" + two_people[0].pName + \"\\nAge: \" + str(two_people[0].age) + \"\\nIncome: \" + str(two_people[0].income) + \"\\nHappiness: \" + str(two_people[0].happiness)
+	#
+	#var Person2 = $Person2
+	#Person2.text = \"P2 attributes:\\n\" + \"Name: \" + two_people[1].pName + \"\\nAge: \" + str(two_people[1].age) + \"\\nIncome: \" + str(two_people[1].income) + \"\\nHappiness: \" + str(two_people[1].happiness)
+
+# Called when the \"Play\" button is pressed
+func _on_play_pressed():
+	var game_scene_path = \"res://Main.tscn\"
+	get_tree().change_scene_to_file(game_scene_path)
+
+# Called when the \"Quit\" button is pressed
+func _on_quit_pressed():
+	get_tree().quit()
+	
+	
+
+func _on_choose_1_pressed(room:String):
+	assert(room in rooms, \"%s not in rooms\" % [room])
+	rooms[room] = fPerson
+
+"
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_d1f3b")
-
-[node name="PopUpPeople" type="Control" parent="."]
-z_index = 9
-layout_mode = 3
-anchors_preset = 0
-offset_left = 217.0
-offset_top = 94.0
-offset_right = 919.0
-offset_bottom = 612.0
-script = SubResource("GDScript_4ykdy")
-
-[node name="Person1" type="Label" parent="PopUpPeople"]
-layout_mode = 0
-offset_left = 75.0
-offset_top = 99.0
-offset_right = 326.0
-offset_bottom = 273.0
-text = "Person1"
-
-[node name="Person2" type="Label" parent="PopUpPeople"]
-layout_mode = 0
-offset_left = 426.0
-offset_top = 98.0
-offset_right = 677.0
-offset_bottom = 272.0
-text = "Person2"
-
-[node name="Choose1" type="Button" parent="PopUpPeople"]
-layout_mode = 0
-offset_left = 73.0
-offset_top = 411.0
-offset_right = 279.0
-offset_bottom = 474.0
-text = "Choose this person"
-
-[node name="Choose2" type="Button" parent="PopUpPeople"]
-layout_mode = 0
-offset_left = 419.0
-offset_top = 409.0
-offset_right = 625.0
-offset_bottom = 472.0
-text = "Choose this person"
-
-[node name="Exit" type="Button" parent="PopUpPeople"]
-layout_mode = 0
-offset_left = 648.0
-offset_top = 1.0
-offset_right = 704.0
-offset_bottom = 54.0
-text = "X"
-
-[node name="ShowPop" type="Button" parent="."]
-offset_left = 1058.0
-offset_top = 334.0
-offset_right = 1114.0
-offset_bottom = 387.0
-text = "show"
 
 [node name="ground" type="TileMap" parent="."]
 position = Vector2(-1, -17)
@@ -1008,12 +951,69 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="PopUpPeople" type="Control" parent="."]
+z_index = 9
+layout_mode = 3
+anchors_preset = 0
+offset_left = 217.0
+offset_top = 94.0
+offset_right = 919.0
+offset_bottom = 612.0
+script = SubResource("GDScript_4ykdy")
+
+[node name="Person1" type="Label" parent="PopUpPeople"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 99.0
+offset_right = 326.0
+offset_bottom = 273.0
+text = "Person1"
+
+[node name="Person2" type="Label" parent="PopUpPeople"]
+layout_mode = 0
+offset_left = 426.0
+offset_top = 98.0
+offset_right = 677.0
+offset_bottom = 272.0
+text = "Person2"
+
+[node name="Choose1" type="Button" parent="PopUpPeople"]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 411.0
+offset_right = 279.0
+offset_bottom = 474.0
+text = "Choose this person"
+
+[node name="Choose2" type="Button" parent="PopUpPeople"]
+layout_mode = 0
+offset_left = 419.0
+offset_top = 409.0
+offset_right = 625.0
+offset_bottom = 472.0
+text = "Choose this person"
+
+[node name="Exit" type="Button" parent="PopUpPeople"]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 1.0
+offset_right = 704.0
+offset_bottom = 54.0
+text = "X"
+
 [node name="CanvasLayer3_DisplayRoom1#Room1" type="Button" parent="."]
 visibility_layer = 0
 offset_left = 326.0
 offset_top = 138.0
 offset_right = 514.0
 offset_bottom = 261.0
+
+[node name="ShowPop" type="Button" parent="."]
+offset_left = 1058.0
+offset_top = 334.0
+offset_right = 1114.0
+offset_bottom = 387.0
+text = "show"
 
 [node name="PLSWORKGOD" type="Button" parent="."]
 offset_left = 439.0
@@ -1022,9 +1022,9 @@ offset_right = 710.0
 offset_bottom = 227.0
 text = "PLS WORK GOD PLSSSSSSSSSSSSSSSSSSSS"
 
+[connection signal="pressed" from="GenPerson" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose1" to="." method="_on_choose_1_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose2" to="." method="_on_choose_2_pressed"]
 [connection signal="pressed" from="PopUpPeople/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="ShowPop" to="." method="_on_show_pop_pressed"]
-[connection signal="pressed" from="GenPerson" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PLSWORKGOD" to="." method="_on_plsworkgod_pressed"]
