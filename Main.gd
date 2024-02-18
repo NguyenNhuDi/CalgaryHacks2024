@@ -134,6 +134,13 @@ func _on_choose_2_pressed():
 	store_person_in_room(p2, "room_2")
 	_on_exit_pressed()
 
+
+
+func _on_room_1_pressed():
+	var r1 = "room_1"
+	var person = rooms[r1]
+	
+	print("Name: ", person.pName)
 func update_averages():
 	var total_happiness = 0.0
 	var total_money = 0
