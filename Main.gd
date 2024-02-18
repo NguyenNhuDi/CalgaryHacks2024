@@ -459,14 +459,24 @@ func _on_evict_left_pressed():
 	var rNum = $DisplayRoomLeft_Control/stats.text[6]
 	var rName = "room_%s" %[rNum]
 	
+	var personName = rooms[rName].pName
+	
 	rooms[rName] = fPerson
+	var name_index = names.find(personName)
+	var personSprite = $Node2D.get_child(name_index)
+	personSprite.visible = false
 	displayLeftProfile(rName)
 	
 func _on_evict_right_pressed():
 	var rNum = $DisplayRoomRight_Control/stats.text[6]
 	var rName = "room_%s" %[rNum]
 	
+	var personName = rooms[rName].pName
+	
 	rooms[rName] = fPerson
+	var name_index = names.find(personName)
+	var personSprite = $Node2D.get_child(name_index)
+	personSprite.visible = false
 	displayRightProfile(rName)
 
 
