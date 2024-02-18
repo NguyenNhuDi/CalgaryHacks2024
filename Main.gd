@@ -159,8 +159,8 @@ func update_averages():
 	var money_percentage = min(money / 1500.0, 100.0)  # Ensuring it doesn't exceed 100%
 	mBar.value = money_percentage
 
-	print("Happiness: ", happiness)
-	print("Money Percentage: ", money_percentage)
+	#print("Happiness: ", happiness)
+	#print("Money Percentage: ", money_percentage)
 
 
 	# Optionally, update any UI elements or notify other parts of your game
@@ -168,8 +168,11 @@ func update_averages():
 	# $HappinessBar.value = happiness
 	# $MoneyLabel.text = str(money)
 	
-	if happiness < 0.2 || money < 0: # temporary game over condition
+	if happiness < 0.2: # temporary game over condition
 		# game ova
+		low_happiness()
+	
+	if money < 0:
 		game_over()
 
 
@@ -235,8 +238,10 @@ func game_over():
 	print("game_over")
 	get_tree().change_scene_to_file("res://game_over_scene.tscn")
 	
+func low_happiness():
+	# temporary, for future implemet more complex thingy / kick someone out idk
+	game_over()
 	
-
 
 func _on_display_room_1_pressed():
 	var p = $DisplayRoom1_Control
