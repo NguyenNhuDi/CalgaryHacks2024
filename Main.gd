@@ -39,6 +39,9 @@ func _process(delta):
 	update_averages()
 	check_actions_and_switch_scene()
 	
+	var quota_label = $quota_label
+	quota_label.text = "Quota: " + str(daily_quota) + " "
+	
 	
 	#Assuming 6 rooms
 	for room in rooms.keys():
@@ -251,7 +254,7 @@ func update_averages():
 	var updated_money = GameState.get_money()
 
 	# Calculate money as a percentage of 150,000
-	var money_percentage = min((updated_money / 150000.0) * 100, 100)  # Ensure it doesn't exceed 100%
+	var money_percentage = min((updated_money / 50000.0) * 100, 100)  # Ensure it doesn't exceed 100%
 
 	# Update UI elements or other game parts with the new values
 	$CanvasLayer/Happiness.value = updated_happiness * 100  # Convert to percentage if needed
@@ -261,6 +264,10 @@ func update_averages():
 	# For example:
 	# $HappinessBar.value = happiness
 	# $MoneyLabel.text = str(money)
+	
+	# check happiness status bar
+
+	
 	if check_game_over_state():
 		game_over()
 	
@@ -275,12 +282,6 @@ func check_game_over_state(): # returns treu if game over
 		return true
 		
 	return false
-
-
-	
-	
-	
-	
 
 func _on_choose_1_pressed():
 
@@ -316,12 +317,13 @@ func get_unoccupied_rooms():
 
 func game_over():
 	print("game_over")
+	GameState.reset_game_state()
 	get_tree().change_scene_to_file("res://game_over_scene.tscn")
 	
 func low_happiness():
 	# temporary, for future implemet more complex thingy / kick someone out idk
-	#game_over()
-	pass
+	game_over()
+	#pass
 	
 
 var leftOn :bool = false
@@ -463,7 +465,6 @@ func check_actions_and_switch_scene():
 		avg_money -= daily_quota
 		GameState.update_money(avg_money)
 
-		
 		if !check_game_over_state():
 			var timer = Timer.new()
 			timer.wait_time = dayOverWaitTime
@@ -478,6 +479,7 @@ func check_actions_and_switch_scene():
 
 
 func _on_timer_timeout():
+	update_averages()
 	get_tree().change_scene_to_file("res://new_day.tscn")
 	# In Godot 4.0, you might not need to manually remove the Timer node if it's one_shot and auto-free on timeout is set
 
