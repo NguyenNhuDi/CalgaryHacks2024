@@ -196,12 +196,47 @@ func get_unoccupied_rooms():
 			unoccupied.append(room_name)
 	return unoccupied
 	
+var p1_on :bool = false
+var p2_on :bool = false
+
+func displayProfile(profile, pic, label, room_name, on):
 	
+	if not on:
+		profile.visible = true
+		
+		var pName = rooms[room_name].pName
+		var age = rooms[room_name].age
+		var income = rooms[room_name].income
+		var happiness = rooms[room_name].happiness
+		
+		label.text = "Name: " + pName + "\n" + "Age: " + str(age) + "\n" + "Income: " + str(income) + "\n" + "Happiness: " + str(happiness) + "\n"
+		
+		pic.texture = load("res://assets/PortraitsFinal/Boy2.png")
+		pic.global_scale.x *= 2
+		pic.global_scale.y *= 2
+		
+		on = true
+	else:
+		profile.visible = false		
+		on = false
+		pic.global_scale.x /= 2
+		pic.global_scale.y /= 2
+	
+	return on
+	
+
+
 func _on_display_room_1_pressed():
-	var p1 = $DisplayRoom1_Control
-	p1.visible = true
-	
+	var p = $DisplayRoom1_Control
 	var pic = $DisplayRoom1_Control/p1Profile
-	pic.texture = load("res://assets/PortraitsFinal/Boy2.png")
+	var label = $DisplayRoom1_Control/p1Info
 	
+	p1_on = displayProfile(p, pic, label, "room_1", p1_on)
 	
+
+func _on_display_room_2_pressed():
+	var p = $DisplayRoom2_Control
+	var pic = $DisplayRoom2_Control/p2Profile
+	var label = $DisplayRoom2_Control/p2Info
+	
+	p2_on = displayProfile(p, pic, label, "room_2", p2_on)

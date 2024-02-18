@@ -995,13 +995,6 @@ offset_top = 118.0
 offset_right = 511.0
 offset_bottom = 241.0
 
-[node name="DisplayRoom2" type="Button" parent="."]
-visibility_layer = 0
-offset_left = 324.0
-offset_top = 243.0
-offset_right = 512.0
-offset_bottom = 366.0
-
 [node name="DisplayRoom1_Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -1012,32 +1005,7 @@ offset_bottom = 243.0
 
 [node name="p1Profile" type="Sprite2D" parent="DisplayRoom1_Control"]
 
-[node name="p1Info" type="Label" parent="DisplayRoom1_Control"]
-layout_mode = 0
-offset_left = -6.0
-offset_top = 50.0
-offset_right = 121.0
-offset_bottom = 73.0
-
-[node name="DisplayRoom2_Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 167.0
-offset_top = 247.0
-offset_right = 312.0
-offset_bottom = 387.0
-
-[node name="p2Profile" type="Sprite2D" parent="DisplayRoom2_Control"]
-
-[node name="p2Info" type="Label" parent="DisplayRoom2_Control"]
-layout_mode = 0
-offset_left = -6.0
-offset_top = 50.0
-offset_right = 121.0
-offset_bottom = 73.0
-
 [connection signal="pressed" from="PopUpPeople/Choose1" to="." method="_on_choose_1_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose2" to="." method="_on_choose_2_pressed"]
 [connection signal="pressed" from="PopUpPeople/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="DisplayRoom1" to="." method="_on_display_room_1_pressed"]
-[connection signal="pressed" from="DisplayRoom2" to="." method="_on_display_room_2_pressed"]
