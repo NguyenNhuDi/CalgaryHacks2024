@@ -35,8 +35,8 @@ func createRandomPerson():
 	
 	return [p1, p2]
 
-var happiness = 33.33
-var money = 10
+var happiness = 0
+var money = 0
 
 func _on_button_pressed():
 	
@@ -134,3 +134,32 @@ func _on_choose_2_pressed():
 	store_person_in_room(p2, "room_2")
 	_on_exit_pressed()
 
+
+
+func _on_room_1_pressed():
+	var r1 = "room_1"
+	var person = rooms[r1]
+	
+	print("Name: ", person.pName)
+func update_averages():
+	var total_happiness = 0.0
+	var total_money = 0
+	var num_persons = 0
+
+	for room in rooms.values():
+		if room != fPerson:  # Assuming fPerson is your 'empty' person
+			total_happiness += room.happiness
+			total_money += room.income
+			num_persons += 1
+
+	if num_persons > 0:
+		happiness = total_happiness / num_persons
+		money = total_money / num_persons
+	else:
+		happiness = 0
+		money = 0
+
+	# Optionally, update any UI elements or notify other parts of your game
+	# For example:
+	# $HappinessBar.value = happiness
+	# $MoneyLabel.text = str(money)

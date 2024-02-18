@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbblxv87luikf"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_qvlyy"]
+[ext_resource type="Texture2D" uid="uid://budr4a53fhbkl" path="res://assets/sky_background.jpg" id="2_ixxbr"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_qvlyy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -700.0
+offset_top = -358.0
+offset_right = 691.0
+offset_bottom = 343.0
+texture = ExtResource("2_ixxbr")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -61.0
+offset_right = 115.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Exit Game"
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
