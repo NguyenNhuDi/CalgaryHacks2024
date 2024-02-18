@@ -20,7 +20,10 @@ func get_happiness():
 # Function to update money
 func update_money(new_money):
 	money = new_money
-
+	
+func get_money():
+	return money
+	
 # Function to update action count
 func update_action_count(new_count):
 	action_count = new_count

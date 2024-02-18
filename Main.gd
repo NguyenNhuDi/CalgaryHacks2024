@@ -139,6 +139,10 @@ func update_averages():
 	var total_money = 0
 	var num_persons = 0
 
+	# Initialize avg_happiness and avg_money at the beginning
+	var avg_happiness = GameState.get_happiness()
+	var avg_money = GameState.get_money()
+
 	for room in rooms.values():
 		if room != fPerson:  # Assuming fPerson is your 'empty' person
 			total_happiness += room.happiness
@@ -146,29 +150,24 @@ func update_averages():
 			num_persons += 1
 
 	if num_persons > 0:
-		var avg_happiness = total_happiness / num_persons
-		GameState.update_happiness(avg_happiness)
-		money = total_money / num_persons  # Consider updating this to use GameState as well
-	else:
-		# If no persons, consider setting default or maintaining current state
- 		# happiness = GameState.get_happiness()  # This line might not be necessary
-		money = money  # Consider updating this to use GameState as well
+		avg_happiness = total_happiness / num_persons
+		GameState.update_happiness(avg_happiness)  # Update happiness in GameState
 
-	# Use GameState to get the updated happiness value
+		avg_money = total_money / num_persons
+		GameState.update_money(avg_money)  # Update money in GameState
+
+	# Retrieve updated values from GameState for use outside the if-else block
 	var updated_happiness = GameState.get_happiness()
+	var updated_money = GameState.get_money()
 
-	# Update happiness ProgressBar
-	var hBar = $CanvasLayer/Happiness
-	hBar.value = updated_happiness * 100  # Assuming you want to convert to percentage
+	# Calculate money as a percentage of 150,000
+	var money_percentage = min((updated_money / 150000.0) * 100, 100)  # Ensure it doesn't exceed 100%
 
-	# Update money ProgressBar as needed
-	# Make sure to adapt this part as well to use GameState for global money tracking
+	# Update UI elements or other game parts with the new values
+	$CanvasLayer/Happiness.value = updated_happiness * 100  # Convert to percentage if needed
+	$CanvasLayer/Money.value = money_percentage  # Use calculated percentage
 
 
-	# Optionally, update any UI elements or notify other parts of your game
-	# For example:
-	# $HappinessBar.value = happiness
-	# $MoneyLabel.text = str(money)
 	
 	if happiness < 0.2 || money < 0: # temporary game over condition
 		# game ova
