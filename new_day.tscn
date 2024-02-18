@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://t403g223wjou"]
+[gd_scene load_steps=4 format=3 uid="uid://1d4swic05mgj"]
 
 [ext_resource type="Script" path="res://new_day.gd" id="1_85t2e"]
+[ext_resource type="FontFile" uid="uid://w06lcq0yfbpg" path="res://assets/m5x7.ttf" id="2_qjelw"]
+[ext_resource type="Texture2D" uid="uid://cfv5f7bwmttl2" path="res://assets/Superhero Backdrop.jpg" id="3_obv3g"]
 
 [node name="NewDay" type="Control"]
 layout_mode = 3
@@ -11,29 +13,34 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_85t2e")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 654.0
-color = Color(0.0313726, 0.0745098, 0.0941176, 1)
-
-[node name="TextEdit" type="TextEdit" parent="."]
-layout_mode = 0
-offset_left = 466.0
-offset_top = 81.0
-offset_right = 718.0
-offset_bottom = 169.0
-theme_override_font_sizes/font_size = 45
-text = "Day Over..."
-editable = false
-
 [node name="NextDay" type="Button" parent="."]
 layout_mode = 0
 offset_left = 475.0
 offset_top = 385.0
 offset_right = 702.0
 offset_bottom = 477.0
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("2_qjelw")
+theme_override_font_sizes/font_size = 70
 text = "Next Day"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.580392, 0.580392, 0.580392, 1)
+self_modulate = Color(0.454902, 0.454902, 0.454902, 1)
+z_index = -1
+layout_mode = 0
+offset_top = -46.0
+offset_right = 1210.0
+offset_bottom = 651.0
+texture = ExtResource("3_obv3g")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 433.0
+offset_top = 31.0
+offset_right = 740.0
+offset_bottom = 160.0
+theme_override_fonts/font = ExtResource("2_qjelw")
+theme_override_font_sizes/font_size = 100
+text = "Day Over..."
 
 [connection signal="pressed" from="NextDay" to="." method="_on_next_day_pressed"]

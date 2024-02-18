@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbblxv87luikf"]
+[gd_scene load_steps=3 format=3 uid="uid://3v21h4jjpfjh"]
 
 [ext_resource type="Script" path="res://main_menu.gd" id="1_qvlyy"]
 [ext_resource type="Texture2D" uid="uid://budr4a53fhbkl" path="res://assets/sky_background.jpg" id="2_ixxbr"]
