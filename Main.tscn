@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://cmad46vkfo8jg"]
+[gd_scene load_steps=85 format=3 uid="uid://cmad46vkfo8jg"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
 [ext_resource type="Texture2D" uid="uid://36u22hqis3kt" path="res://assets/taylor_asset_ground.png" id="3_nbdlv"]
