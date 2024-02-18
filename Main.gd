@@ -154,12 +154,22 @@ func update_averages():
 		happiness = total_happiness / num_persons
 		money = total_money / num_persons
 	else:
-		happiness = happiness
-		money = money
-		
+		happiness = 0
+		money = 0
+
+	# Update happiness ProgressBar
 	var hBar = $CanvasLayer/Happiness
 	hBar.value = 100 * happiness
-	print(happiness)
+
+	# Update money ProgressBar
+	var mBar = $CanvasLayer/Money
+	# Convert average money to a percentage of 10000 for the ProgressBar
+	var money_percentage = min(money / 1500.0, 100.0)  # Ensuring it doesn't exceed 100%
+	mBar.value = money_percentage
+
+	print("Happiness: ", happiness)
+	print("Money Percentage: ", money_percentage)
+
 
 	# Optionally, update any UI elements or notify other parts of your game
 	# For example:
