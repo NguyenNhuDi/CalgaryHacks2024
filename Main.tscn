@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://cmad46vkfo8jg"]
+[gd_scene load_steps=77 format=3 uid="uid://cmad46vkfo8jg"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
 [ext_resource type="Texture2D" uid="uid://36u22hqis3kt" path="res://assets/taylor_asset_ground.png" id="3_nbdlv"]
@@ -2406,12 +2406,6 @@ func _on_choose_1_pressed(room:String):
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fdf46"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iibpq"]
-bg_color = Color(0.556863, 0.603922, 0.670588, 1)
-
-[sub_resource type="Theme" id="Theme_fcj0i"]
-Panel/styles/panel = SubResource("StyleBoxFlat_iibpq")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ubp1x"]
 bg_color = Color(0.172549, 0.705882, 0.423529, 1)
 border_width_left = 4
@@ -2475,6 +2469,57 @@ shadow_offset = Vector2(5, 5)
 [sub_resource type="Theme" id="Theme_o07fg"]
 Button/styles/hover = SubResource("StyleBoxFlat_pce0x")
 Button/styles/normal = SubResource("StyleBoxFlat_q85xj")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r13fi"]
+bg_color = Color(0.643137, 0.168627, 0.176471, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tky21"]
+bg_color = Color(0.752941, 0.211765, 0.219608, 1)
+border_width_bottom = 7
+border_color = Color(0.458824, 0.105882, 0.113725, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="Theme" id="Theme_g8txi"]
+Button/styles/hover = SubResource("StyleBoxFlat_r13fi")
+Button/styles/normal = SubResource("StyleBoxFlat_tky21")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oencx"]
+bg_color = Color(0.643137, 0.168627, 0.176471, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_blend = true
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4ho6"]
+bg_color = Color(0.752941, 0.211765, 0.219608, 1)
+border_width_bottom = 7
+border_color = Color(0.458824, 0.105882, 0.113725, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="Theme" id="Theme_2pux4"]
+Button/styles/hover = SubResource("StyleBoxFlat_oencx")
+Button/styles/normal = SubResource("StyleBoxFlat_j4ho6")
 
 [sub_resource type="Animation" id="Animation_hq36l"]
 length = 0.001
@@ -3162,7 +3207,6 @@ material = SubResource("CanvasItemMaterial_fdf46")
 layout_mode = 0
 offset_right = 515.0
 offset_bottom = 523.0
-theme = SubResource("Theme_fcj0i")
 
 [node name="Person1" type="Label" parent="PopUpPeople"]
 modulate = Color(1, 0.639216, 0.388235, 1)
@@ -3276,6 +3320,7 @@ offset_left = 8.0
 offset_top = 334.0
 offset_right = 117.0
 offset_bottom = 366.0
+theme = SubResource("Theme_g8txi")
 text = "EVICT"
 
 [node name="DisplayRoomRight_Control" type="Control" parent="."]
@@ -3308,6 +3353,7 @@ offset_left = 3.0
 offset_top = 337.0
 offset_right = 112.0
 offset_bottom = 369.0
+theme = SubResource("Theme_2pux4")
 text = "EVICT"
 
 [node name="Node2D" type="Node2D" parent="."]
