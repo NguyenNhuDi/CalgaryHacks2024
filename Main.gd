@@ -1,7 +1,8 @@
 extends Node2D
 var Person_Obj = preload("res://Person_Obj.gd")
 
-var names = ["Bartu", "Di", "Brett", "Taylor", "Lucy"]
+var name_path = {"Bartu": "res://assets/Characters/tile000.png", "Di":"res://assets/Characters/tile001.png", "Brett":"res://assets/Characters/tile002.png", "Taylor":"res://assets/Characters/tile003.png", "Lucy":"res://assets/Characters/tile005.png", "Emma":"res://assets/Characters/tile007.png", "Liam":"res://assets/Characters/tile004.png", "Olivia":"res://assets/Characters/tile016.png", "Noah": "res://assets/Characters/tile006.png", "Ava": "res://assets/Characters/tile019.png", "William": "res://assets/Characters/tile008.png", "James": "res://assets/Characters/tile009.png", "Benjamin": "res://assets/Characters/tile010.png", "Elijah": "res://assets/Characters/tile011.png", "Lucas": "res://assets/Characters/tile012.png", "Andrew": "res://assets/Characters/tile013.png", "Joshua": "res://assets/Characters/tile014.png", "Nicholas": "res://assets/Characters/tile015.png", "Ryan": "res://assets/Characters/tile017.png", "Tyler": "res://assets/Characters/tile018.png"}
+var names = ["Bartu", "Di", "Brett", "Taylor", "Lucy", "Emma", "Liam", "Olivia", "Noah", "Ava", "William", "James", "Benjamin", "Elijah", "Lucas", "Andrew", "Joshua", "Nicholas", "Ryan", "Tyler"]
 var ages = [13, 34, 45, 66, 21, 25, 66, 99, 101230, 3, 5, 3434]
 var incomes = [2333, 21, 4544, 5666, 909, 4343, 95959, 20333]
 var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
@@ -10,8 +11,25 @@ var elapsed_time = 0
 const DURATION = 5 # duration between popups
 var popup_open = false
 
+func spawnSprite(person: Person, room: String):
+
+	$Node2D/Sprite2D.visible = true
+	
+	$Node2D/Sprite2D.position.x = 410
+	$Node2D/Sprite2D.position.y = 220
+	
+	$Node2D/Sprite2D.scale = Vector2(2,2)
+	
+	$Node2D/AnimationPlayer.play("tile0")
+	
+
+
 var moveDirection := 1 # 1 for moving right, -1 for moving left
 var moveAmount := 0.5
+
+
+#these lists are in the format of [x_min, x_max, y]
+var room1coord = [340, 480, 220]
 
 var room1_x_min = 330
 var room1_x_max = 480
@@ -202,18 +220,6 @@ func update_averages():
 	# $HappinessBar.value = happiness
 	# $MoneyLabel.text = str(money)
 
-
-func spawnSprite(person: Person, room: String):
-
-	$Node2D/Sprite2D.visible = true
-	
-	$Node2D/Sprite2D.position.x = 350
-	$Node2D/Sprite2D.position.y = 220
-	
-	$Node2D/Sprite2D.scale = Vector2(2,2)
-	
-	$Node2D/AnimationPlayer.play("tile0")
-	
 
 
 	
