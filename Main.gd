@@ -7,7 +7,8 @@ var incomes = [2333, 21, 4544, 5666, 909, 4343, 95959, 20333]
 var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
 
 var elapsed_time = 0
-const DURATION = 5 # duration between popups
+# TODO undo 100s wait time
+const DURATION = 100 # duration between popups
 var popup_open = false
 
 func _process(delta):
@@ -16,7 +17,6 @@ func _process(delta):
 		
 	if elapsed_time >= DURATION: # open popup once timer reaches DURATION
 		_on_show_pop_pressed()
-		print("timer called")
 		elapsed_time = 0
 		
 	update_averages()
@@ -56,25 +56,7 @@ var happiness = 1
 var money = 0
 var action_count = 0
 
-func _on_button_pressed():
-	
-	var two_people = createRandomPerson()
-	
-	print("P1 attributes:")
-	print("Name: ", two_people[0].pName)
-	print("Age: ", two_people[0].age)
-	print("Income: ", two_people[0].income)
-	print("Happiness: ", two_people[0].happiness)
-	
-	print("\n\n\n")
-	
-	print("P2 attributes:")
-	print("Name: ", two_people[1].pName)
-	print("Age: ", two_people[1].age)
-	print("Income: ", two_people[1].income)
-	print("Happiness: ", two_people[1].happiness)
-	
-	print("\n\n\n")
+
 	
 var rooms = {}
 var fPerson = Person_Obj.new("null", -1, -1, 0)
@@ -91,10 +73,18 @@ func remove_person_in_room(room:String):
 	rooms[room] = fPerson
 
 func _ready():
+	var lControl = $DisplayRoomLeft_Control
+	var rControl = $DisplayRoomRight_Control
+	lControl.visible = false
+	rControl.visible = false
+	
 	# initialize rooms:
 	for i in range(6):
-		var rName = "room_%d" % [i]
+		var rName = "room_%d" % [i+1]
 		rooms[rName] = fPerson
+		
+	var b2 = Person_Obj.new("Bartu Okan", 21, 1000, 0.85)
+	rooms["room_1"] = b2
 		
 	
 var p1 :Person
@@ -159,15 +149,6 @@ func update_averages():
 	var money_percentage = min(money / 1500.0, 100.0)  # Ensuring it doesn't exceed 100%
 	mBar.value = money_percentage
 
-	print("Happiness: ", happiness)
-	print("Money Percentage: ", money_percentage)
-
-
-	# Optionally, update any UI elements or notify other parts of your game
-	# For example:
-	# $HappinessBar.value = happiness
-	# $MoneyLabel.text = str(money)
-	
 	if happiness < 0.2 || money < 0: # temporary game over condition
 		# game ova
 		game_over()
@@ -204,55 +185,130 @@ func get_unoccupied_rooms():
 			unoccupied.append(room_name)
 	return unoccupied
 	
-var p1_on :bool = false
-var p2_on :bool = false
 
-func displayProfile(profile, pic, label, room_name, on):
-	
-	if not on:
-		profile.visible = true
-		
-		var pName = rooms[room_name].pName
-		var age = rooms[room_name].age
-		var income = rooms[room_name].income
-		var happiness = rooms[room_name].happiness
-		
-		label.text = "Name: " + pName + "\n" + "Age: " + str(age) + "\n" + "Income: " + str(income) + "\n" + "Happiness: " + str(happiness) + "\n"
-		
-		pic.texture = load("res://assets/PortraitsFinal/Boy2.png")
-		pic.global_scale.x *= 2
-		pic.global_scale.y *= 2
-		
-		on = true
-	else:
-		profile.visible = false		
-		on = false
-		pic.global_scale.x /= 2
-		pic.global_scale.y /= 2
-	
-	return on
 func game_over():
 	print("game_over")
 	get_tree().change_scene_to_file("res://game_over_scene.tscn")
 	
 	
 
+var leftOn :bool = false
+var leftPrevNum :int = -1
+
+func displayLeftProfile(room_name):
+	var control = $DisplayRoomLeft_Control
+	var profile = $DisplayRoomLeft_Control/profile
+	var stats = $DisplayRoomLeft_Control/stats
+	var rNum = int(room_name[-1])
+	
+
+	# another profile is displayed
+	if leftPrevNum != -1 and leftPrevNum != rNum:
+		control.visible = false		
+		profile.global_scale.x /= 2
+		profile.global_scale.y /= 2
+		leftPrevNum = -1
+		leftOn = false		
+	
+	if not leftOn:
+		control.visible = true
+		
+		var pName = rooms[room_name].pName
+		var age = rooms[room_name].age
+		var income = rooms[room_name].income
+		var happiness = rooms[room_name].happiness
+		
+		stats.text = "Room: " + str(room_name[-1]) +  "\nName: " + pName + "\nAge: " + str(age) + "\nIncome: " + str(income) + "\nHappiness: " + str(happiness) + "\n"
+		
+		if pName != "null":
+			profile.texture = load("res://assets/PortraitsFinal/Boy2.png")
+		else:
+			profile.texture = null
+		profile.global_scale.x *= 2
+		profile.global_scale.y *= 2
+		
+		leftPrevNum = rNum
+		leftOn = true
+	else:
+		control.visible = false		
+		profile.global_scale.x /= 2
+		profile.global_scale.y /= 2
+		leftPrevNum = -1
+		leftOn = false		
+
+var rightOn :bool = false
+var rightPrevNum :int = -1
+
+func displayRightProfile(room_name):
+	var control = $DisplayRoomRight_Control
+	var profile = $DisplayRoomRight_Control/profile
+	var stats = $DisplayRoomRight_Control/stats
+	var rNum = int(room_name[-1])
+	
+	# another profile is displayed
+	if rightPrevNum != -1 and rightPrevNum != rNum:
+		control.visible = false		
+		profile.global_scale.x /= 2
+		profile.global_scale.y /= 2
+		rightPrevNum = -1
+		rightOn = false		
+	
+	if not rightOn:
+		control.visible = true
+		
+		var pName = rooms[room_name].pName
+		var age = rooms[room_name].age
+		var income = rooms[room_name].income
+		var happiness = rooms[room_name].happiness
+		
+		stats.text = "Room: " + str(room_name[-1]) +  "\nName: " + pName + "\nAge: " + str(age) + "\nIncome: " + str(income) + "\nHappiness: " + str(happiness) + "\n"
+		
+		
+		if pName != "null":
+			profile.texture = load("res://assets/PortraitsFinal/Boy2.png")
+		else:
+			profile.texture = null		
+		profile.global_scale.x *= 2
+		profile.global_scale.y *= 2
+		
+		rightPrevNum = rNum
+		rightOn = true
+	else:
+		control.visible = false		
+		profile.global_scale.x /= 2
+		profile.global_scale.y /= 2
+		rightPrevNum = -1
+		rightOn = false		
+	
 
 func _on_display_room_1_pressed():
-	var p = $DisplayRoom1_Control
-	var pic = $DisplayRoom1_Control/p1Profile
-	var label = $DisplayRoom1_Control/p1Info
+	displayLeftProfile("room_1")
 	
-	p1_on = displayProfile(p, pic, label, "room_1", p1_on)
-	
-
 func _on_display_room_2_pressed():
-	var p = $DisplayRoom2_Control
-	var pic = $DisplayRoom2_Control/p2Profile
-	var label = $DisplayRoom2_Control/p2Info
+	displayLeftProfile("room_2")
+
+func _on_display_room_3_pressed():
+	displayLeftProfile("room_3")
+
+func _on_display_room_4_pressed():
+	displayRightProfile("room_4")
 	
-	p2_on = displayProfile(p, pic, label, "room_2", p2_on)
+func _on_display_room_5_pressed():
+	displayRightProfile("room_5")
+
+func _on_display_room_6_pressed():
+	displayRightProfile("room_6")
 
 func check_actions_and_switch_scene():
 	if action_count > 3:
 		get_tree().change_scene_to_file("res://new_day.tscn")
+
+
+func _on_evict_left_pressed():
+	var rNum = $DisplayRoomLeft_Control/stats.text[6]
+	var rName = "room_%s" %[rNum]
+	
+	rooms[rName] = fPerson
+	
+	displayLeftProfile(rName)
+	
