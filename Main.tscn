@@ -1047,4 +1047,3 @@ offset_bottom = 261.0
 [connection signal="pressed" from="PopUpPeople/Choose1" to="." method="_on_choose_1_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose2" to="." method="_on_choose_2_pressed"]
 [connection signal="pressed" from="PopUpPeople/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Test Button" to="." method="_on_test_button_pressed"]
