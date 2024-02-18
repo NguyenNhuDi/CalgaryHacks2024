@@ -17,6 +17,7 @@ size_flags_vertical = 4
 script = ExtResource("1_qvlyy")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = -700.0
 offset_top = -358.0
 offset_right = 691.0
