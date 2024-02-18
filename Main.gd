@@ -133,6 +133,8 @@ func _on_room_1_pressed():
 	
 	#print("Name: ", person.pName)
 	
+var avg_happiness = GameState.get_happiness()
+var avg_money = GameState.get_money()
 
 func update_averages():
 	var total_happiness = 0.0
@@ -140,8 +142,7 @@ func update_averages():
 	var num_persons = 0
 
 	# Initialize avg_happiness and avg_money at the beginning
-	var avg_happiness = GameState.get_happiness()
-	var avg_money = GameState.get_money()
+	
 
 	for room in rooms.values():
 		if room != fPerson:  # Assuming fPerson is your 'empty' person
@@ -153,7 +154,7 @@ func update_averages():
 		avg_happiness = total_happiness / num_persons
 		GameState.update_happiness(avg_happiness)  # Update happiness in GameState
 
-		avg_money = total_money / num_persons
+		avg_money = total_money
 		GameState.update_money(avg_money)  # Update money in GameState
 
 	# Retrieve updated values from GameState for use outside the if-else block
@@ -188,7 +189,6 @@ func check_game_over_state(): # returns treu if game over
 		low_happiness()
 	
 	if GameState.get_money() < 0:
-		#print("yeahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
 		return true
 		
 	return false
@@ -282,12 +282,13 @@ func check_actions_and_switch_scene():
 		
 	if action_count == 3:
 		# subtract the quota from profit then update the quota 
-		GameState.update_money(GameState.get_money() - daily_quota)
+		avg_money -= daily_quota
+		GameState.update_money(avg_money)
+
 		
-		daily_quota *= 2 # temporary quota update - change later ??????
 		if !check_game_over_state():
 			var timer = Timer.new()
-			timer.wait_time = 10
+			timer.wait_time = 2
 			timer.one_shot = true
 			add_child(timer)
 			# Use Callable for connecting in Godot 4.0
@@ -295,6 +296,7 @@ func check_actions_and_switch_scene():
 			timer.start()
 		else:
 			game_over()
+			GameState.reset_game_state()
 
 
 func _on_timer_timeout():

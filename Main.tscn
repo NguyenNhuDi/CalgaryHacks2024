@@ -768,20 +768,6 @@ texture = ExtResource("5_wbucn")
 [sub_resource type="TileSet" id="TileSet_fgflw"]
 sources/0 = SubResource("TileSetAtlasSource_i26cf")
 
-[sub_resource type="GDScript" id="GDScript_ghtrh"]
-script/source = "extends ProgressBar
-
-
-func _ready():
-	update()
-	
-	
-func update():
-	value = get_parent().get_parent().happiness
-	
-	
-"
-
 [sub_resource type="GDScript" id="GDScript_4ykdy"]
 script/source = "extends Control
 
