@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://1d4swic05mgj"]
+
+[ext_resource type="Script" path="res://new_day.gd" id="1_85t2e"]
+
+[node name="NewDay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_85t2e")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 654.0
+color = Color(0.0313726, 0.0745098, 0.0941176, 1)
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 469.0
+offset_top = 90.0
+offset_right = 721.0
+offset_bottom = 161.0
+theme_override_font_sizes/font_size = 45
+text = "Day Over..."
+
+[node name="NextDay" type="Button" parent="."]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 385.0
+offset_right = 702.0
+offset_bottom = 477.0
+theme_override_font_sizes/font_size = 40
+text = "Next Day"
+
+[connection signal="pressed" from="NextDay" to="." method="_on_next_day_pressed"]

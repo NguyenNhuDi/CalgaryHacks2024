@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmg1ca2s3d5gr"]
+[gd_scene load_steps=12 format=3 uid="uid://cmad46vkfo8jg"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
 [ext_resource type="Script" path="res://ProgressBar.gd" id="2_wyxhy"]

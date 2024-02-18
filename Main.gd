@@ -18,7 +18,9 @@ func _process(delta):
 		_on_show_pop_pressed()
 		print("timer called")
 		elapsed_time = 0
+		
 	update_averages()
+	check_actions_and_switch_scene()
 		
 		
 	
@@ -52,6 +54,7 @@ func createRandomPerson():
 
 var happiness = 1
 var money = 0
+var action_count = 0
 
 func _on_button_pressed():
 	
@@ -93,18 +96,6 @@ func _ready():
 		var rName = "room_%d" % [i]
 		rooms[rName] = fPerson
 		
-	var b2 = Person_Obj.new("Bartu", 21, 2000, 0.001)
-	
-	store_person_in_room(b2, "room_2")
-	
-	print("Person in room_2:")
-	print(rooms["room_2"].pName)
-	
-	print("removing person...")
-	remove_person_in_room("room_2")
-	
-	print("Person in room_2:")
-	print(rooms["room_2"].pName)
 	
 var p1 :Person
 var p2 :Person
@@ -155,7 +146,8 @@ func update_averages():
 		money = total_money / num_persons
 	else:
 		happiness = happiness
-		money = 0
+		money = money
+
 
 	# Update happiness ProgressBar
 	var hBar = $CanvasLayer/Happiness
@@ -184,6 +176,7 @@ func update_averages():
 func _on_choose_1_pressed():
 	var unoccupied_rooms = get_unoccupied_rooms()
 	if unoccupied_rooms.size() > 0:
+		action_count+= 1
 		var random_room = unoccupied_rooms[randi() % unoccupied_rooms.size()]
 		store_person_in_room(p1, random_room)
 		popup_open = false
@@ -195,6 +188,7 @@ func _on_choose_1_pressed():
 func _on_choose_2_pressed():
 	var unoccupied_rooms = get_unoccupied_rooms()
 	if unoccupied_rooms.size() > 0:
+		action_count+= 1
 		var random_room = unoccupied_rooms[randi() % unoccupied_rooms.size()]
 		store_person_in_room(p2, random_room)
 		popup_open = false
@@ -258,3 +252,7 @@ func _on_display_room_2_pressed():
 	var label = $DisplayRoom2_Control/p2Info
 	
 	p2_on = displayProfile(p, pic, label, "room_2", p2_on)
+
+func check_actions_and_switch_scene():
+	if action_count > 3:
+		get_tree().change_scene_to_file("res://new_day.tscn")
