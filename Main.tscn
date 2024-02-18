@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmad46vkfo8jg"]
+[gd_scene load_steps=9 format=3 uid="uid://dmg1ca2s3d5gr"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
 [ext_resource type="Script" path="res://ProgressBar.gd" id="2_wyxhy"]
@@ -830,8 +830,23 @@ tile_set = SubResource("TileSet_fgflw")
 format = 2
 layer_0/tile_data = PackedInt32Array(1114134, 2228224, 9, 1114135, 2293760, 9, 1114136, 2293760, 7, 1114133, 2293760, 268435463, 1114126, 2228224, 9, 1114127, 2293760, 9, 1114128, 2293760, 7, 1114125, 2293760, 268435463, 327691, 1572864, 8, 327692, 1638400, 8, 589835, 1572864, 8, 589836, 1638400, 8, 851979, 1572864, 8, 851980, 1638400, 8, 327706, 1572864, 268435464, 327705, 1638400, 268435464, 589850, 1572864, 268435464, 589849, 1638400, 268435464, 851994, 1572864, 268435464, 851993, 1638400, 268435464, 917522, 1572864, 7, 917523, 1572864, 7, 655378, 1572864, 7, 655379, 1572864, 7, 393234, 1572864, 7, 393235, 1572864, 7, 131090, 1572864, 7, 131091, 1572864, 7, 131085, 1507328, 7, 393229, 1507328, 7, 655373, 1507328, 7, 655384, 1507328, 7, 393240, 1507328, 7, 131096, 1507328, 7, 786445, 1507328, 11, 851981, 1507328, 12, 524301, 1507328, 11, 589837, 1507328, 12, 262157, 1507328, 11, 327693, 1507328, 12, 262168, 1507328, 11, 327704, 1507328, 12, 524312, 1507328, 11, 589848, 1507328, 12, 786456, 1507328, 11, 851992, 1507328, 12, 327695, 2097152, 7, 589839, 2097152, 7, 851983, 2097152, 7, 327702, 2097152, 7, 589846, 2097152, 7, 851990, 2097152, 7, 851982, 2097152, 11, 589838, 2097152, 11, 327694, 2097152, 11, 327703, 2097152, 11, 589847, 2097152, 11, 851991, 2097152, 11, 786444, 2490368, 8, 786457, 2490368, 8, 524313, 2490368, 8, 262169, 2490368, 8, 262156, 2490368, 8, 524300, 2490368, 8, 1048590, 2424832, 8, 1048591, 2424832, 8, 1048598, 2424832, 8, 1048599, 2424832, 8, 1048602, 1441792, 11, 1114138, 1441792, 12, 1048601, 1441792, 11, 1114137, 1441792, 12, 1048592, 2424832, 3, 1048597, 2424832, 3, 720911, 2359296, 3, 786455, 2359296, 3, 262167, 2359296, 3, 262158, 2359296, 3, 458766, 2359296, 3, 458774, 2359296, 3, 720914, 2424832, 3, 458771, 2424832, 3, 196627, 2424832, 3)
 
+[node name="DisplayRoom1" type="Control" parent="CanvasLayer3"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Room1" type="Button" parent="CanvasLayer3/DisplayRoom1"]
+visibility_layer = 0
+layout_mode = 0
+offset_left = 326.0
+offset_top = 138.0
+offset_right = 514.0
+offset_bottom = 261.0
+
 [connection signal="pressed" from="GenPerson" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="ShowPop" to="." method="_on_show_pop_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose1" to="." method="_on_choose_1_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose2" to="." method="_on_choose_2_pressed"]
 [connection signal="pressed" from="PopUpPeople/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="CanvasLayer3/DisplayRoom1/Room1" to="." method="_on_room_1_pressed"]
