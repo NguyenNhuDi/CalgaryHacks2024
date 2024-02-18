@@ -11,10 +11,10 @@ const DURATION = 5 # duration between popups
 var popup_open = false
 
 func _process(delta):
-	if popup_open == false:
+	if popup_open == false: # start timer when the popup is not open
 		elapsed_time += delta
 		
-	if elapsed_time >= DURATION:
+	if elapsed_time >= DURATION: # open popup once timer reaches DURATION
 		_on_show_pop_pressed()
 		print("timer called")
 		elapsed_time = 0
@@ -154,7 +154,7 @@ func update_averages():
 		happiness = total_happiness / num_persons
 		money = total_money / num_persons
 	else:
-		happiness = 0
+		happiness = happiness
 		money = 0
 
 	# Update happiness ProgressBar
@@ -175,6 +175,10 @@ func update_averages():
 	# For example:
 	# $HappinessBar.value = happiness
 	# $MoneyLabel.text = str(money)
+	
+	if happiness < 0.2 || money < 0: # temporary game over condition
+		# game ova
+		game_over()
 
 
 func _on_choose_1_pressed():
@@ -205,6 +209,10 @@ func get_unoccupied_rooms():
 		if rooms[room_name] == fPerson:
 			unoccupied.append(room_name)
 	return unoccupied
+	
+func game_over():
+	print("game_over")
+	get_tree().change_scene_to_file("res://game_over_scene.tscn")
 	
 	
 
