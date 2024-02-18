@@ -352,9 +352,14 @@ func _on_evict_left_pressed():
 	var rName = "room_%s" %[rNum]
 	
 	rooms[rName] = fPerson
-	
 	displayLeftProfile(rName)
-
+	
+func _on_evict_right_pressed():
+	var rNum = $DisplayRoomRight_Control/stats.text[6]
+	var rName = "room_%s" %[rNum]
+	
+	rooms[rName] = fPerson
+	displayRightProfile(rName)
 
 
 func check_actions_and_switch_scene():
@@ -380,4 +385,7 @@ func check_actions_and_switch_scene():
 func _on_timer_timeout():
 	get_tree().change_scene_to_file("res://new_day.tscn")
 	# In Godot 4.0, you might not need to manually remove the Timer node if it's one_shot and auto-free on timeout is set
+
+
+
 
