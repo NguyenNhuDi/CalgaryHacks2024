@@ -11,14 +11,14 @@ const DURATION = 5 # duration between popups
 var popup_open = false
 
 func _process(delta):
-	#if popup_open == false:
-		#elapsed_time += delta
-		#
-	#if elapsed_time >= DURATION:
-		#_on_show_pop_pressed()
-		#print("timer called")
-		#elapsed_time = 0
-	pass
+	if popup_open == false:
+		elapsed_time += delta
+		
+	if elapsed_time >= DURATION:
+		_on_show_pop_pressed()
+		print("timer called")
+		elapsed_time = 0
+	update_averages()
 		
 		
 	
@@ -148,12 +148,10 @@ func _on_exit_pressed():
 
 
 func _on_choose_2_pressed():
-	print("s3w4edr5ftgyhuji")
 	
 	store_person_in_room(p2, "room_2")
 	popup_open = false
 	_on_exit_pressed()
-
 
 
 func _on_room_1_pressed():
@@ -161,6 +159,8 @@ func _on_room_1_pressed():
 	var person = rooms[r1]
 	
 	print("Name: ", person.pName)
+	
+
 func update_averages():
 	var total_happiness = 0.0
 	var total_money = 0
@@ -178,6 +178,10 @@ func update_averages():
 	else:
 		happiness = 0
 		money = 0
+		
+	var hBar = $CanvasLayer/Happiness
+	hBar.value = 100 * happiness
+	print(happiness)
 
 	# Optionally, update any UI elements or notify other parts of your game
 	# For example:
@@ -186,12 +190,10 @@ func update_averages():
 
 
 func _on_choose_1_pressed():
-	print("s3w4edr5ftgyhuji")
-	store_person_in_room(p1, "room_2")
+	store_person_in_room(p1, "room_1")
 	popup_open = false
 	_on_exit_pressed()
 	
 
 
-func _on_plsworkgod_pressed():
-	print("HELLOOOOOOOOOOOOOOOO")
+
