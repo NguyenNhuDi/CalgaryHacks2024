@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://i1r1iourf0oq" path="res://assets/bg_3.jpg" id="6_l0hab"]
 [ext_resource type="FontFile" uid="uid://w06lcq0yfbpg" path="res://assets/m5x7.ttf" id="7_74ivm"]
 [ext_resource type="Texture2D" uid="uid://q83wx814ab22" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile000.png" id="7_wujq6"]
+[ext_resource type="Texture2D" uid="uid://byduleqa5awn1" path="res://assets/GUI.png" id="8_hd7n5"]
 [ext_resource type="Texture2D" uid="uid://7xak8rhvmfd5" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile001.png" id="8_nxy4g"]
 [ext_resource type="Texture2D" uid="uid://dgmufrqlhsxow" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile002.png" id="9_vhyo6"]
 [ext_resource type="Texture2D" uid="uid://c0db84iu08vfw" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile003.png" id="10_ls4kp"]
@@ -2406,6 +2407,23 @@ func _on_choose_1_pressed(room:String):
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fdf46"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f1np8"]
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="Theme" id="Theme_pkvrk"]
+Panel/styles/panel = SubResource("StyleBoxTexture_f1np8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d7oq8"]
+texture = ExtResource("8_hd7n5")
+texture_margin_left = 7.78399
+texture_margin_top = 20.7565
+texture_margin_right = 8.18938
+texture_margin_bottom = 20.7565
+region_rect = Rect2(48.9987, 96.972, 29.999, 29.8639)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ubp1x"]
 bg_color = Color(0.172549, 0.705882, 0.423529, 1)
 border_width_left = 4
@@ -2418,9 +2436,6 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-shadow_color = Color(0.0313726, 0.207843, 0.109804, 1)
-shadow_size = 4
-shadow_offset = Vector2(5, 5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twalk"]
 bg_color = Color(0.239216, 0.607843, 1, 1)
@@ -2430,9 +2445,6 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-shadow_color = Color(0, 0.0627451, 0.152941, 1)
-shadow_size = 4
-shadow_offset = Vector2(5, 5)
 
 [sub_resource type="Theme" id="Theme_uxpmx"]
 Button/styles/hover = SubResource("StyleBoxFlat_ubp1x")
@@ -2450,9 +2462,6 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-shadow_color = Color(0.0319563, 0.209622, 0.111273, 1)
-shadow_size = 4
-shadow_offset = Vector2(5, 5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q85xj"]
 bg_color = Color(0.239216, 0.607843, 1, 1)
@@ -2462,13 +2471,90 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-shadow_color = Color(0, 0.0627451, 0.152941, 1)
-shadow_size = 4
-shadow_offset = Vector2(5, 5)
 
 [sub_resource type="Theme" id="Theme_o07fg"]
 Button/styles/hover = SubResource("StyleBoxFlat_pce0x")
 Button/styles/normal = SubResource("StyleBoxFlat_q85xj")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l0vb4"]
+bg_color = Color(0.466667, 0.392157, 0.294118, 1)
+border_width_right = 5
+border_width_bottom = 12
+border_color = Color(0.275703, 0.224508, 0.160871, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 4
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Theme" id="Theme_johj2"]
+Panel/styles/panel = SubResource("StyleBoxFlat_l0vb4")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r13fi"]
+bg_color = Color(0.643137, 0.168627, 0.176471, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_blend = true
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tky21"]
+bg_color = Color(0.752941, 0.211765, 0.219608, 1)
+border_width_bottom = 7
+border_color = Color(0.458824, 0.105882, 0.113725, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="Theme" id="Theme_g8txi"]
+Button/styles/hover = SubResource("StyleBoxFlat_r13fi")
+Button/styles/normal = SubResource("StyleBoxFlat_tky21")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_67fj3"]
+bg_color = Color(0.468011, 0.390375, 0.294167, 1)
+border_width_left = 5
+border_width_bottom = 12
+border_color = Color(0.275703, 0.224508, 0.160871, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 4
+shadow_offset = Vector2(-5, 5)
+
+[sub_resource type="Theme" id="Theme_6etj2"]
+Panel/styles/panel = SubResource("StyleBoxFlat_67fj3")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oencx"]
+bg_color = Color(0.643137, 0.168627, 0.176471, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_blend = true
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4ho6"]
+bg_color = Color(0.752941, 0.211765, 0.219608, 1)
+border_width_bottom = 7
+border_color = Color(0.458824, 0.105882, 0.113725, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="Theme" id="Theme_2pux4"]
+Button/styles/hover = SubResource("StyleBoxFlat_oencx")
+Button/styles/normal = SubResource("StyleBoxFlat_j4ho6")
 
 [sub_resource type="Animation" id="Animation_hq36l"]
 length = 0.001
@@ -3117,7 +3203,8 @@ offset_left = 100.0
 offset_top = -25.0
 offset_right = 181.0
 offset_bottom = -2.0
-theme_override_colors/font_color = Color(0.815686, 0.501961, 0, 1)
+theme_override_fonts/font = ExtResource("7_74ivm")
+theme_override_font_sizes/font_size = 30
 text = "Happiness"
 
 [node name="Line2D2" type="Line2D" parent="CanvasLayer/Happiness"]
@@ -3149,6 +3236,8 @@ offset_top = -26.0
 offset_right = 175.0
 offset_bottom = -3.0
 theme_override_colors/font_color = Color(0, 0.45098, 0.121569, 1)
+theme_override_fonts/font = ExtResource("7_74ivm")
+theme_override_font_sizes/font_size = 30
 text = "Profits"
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -3173,29 +3262,33 @@ offset_bottom = 612.0
 script = SubResource("GDScript_4ykdy")
 
 [node name="MiddlePannel" type="Panel" parent="PopUpPeople"]
-modulate = Color(0.423529, 0.427451, 0.0745098, 1)
-self_modulate = Color(0, 0.219608, 0.152941, 1)
 material = SubResource("CanvasItemMaterial_fdf46")
 layout_mode = 0
 offset_right = 515.0
 offset_bottom = 523.0
+theme = SubResource("Theme_pkvrk")
+theme_override_styles/panel = SubResource("StyleBoxTexture_d7oq8")
 
 [node name="Person1" type="Label" parent="PopUpPeople"]
-modulate = Color(1, 0.639216, 0.388235, 1)
 layout_mode = 0
 offset_left = 6.0
 offset_top = 16.0
 offset_right = 192.0
 offset_bottom = 281.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_74ivm")
+theme_override_font_sizes/font_size = 35
 text = "Person1"
 
 [node name="Person2" type="Label" parent="PopUpPeople"]
-self_modulate = Color(1, 0.639216, 0.388235, 1)
 layout_mode = 0
 offset_left = 327.0
 offset_top = 19.0
 offset_right = 513.0
 offset_bottom = 272.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_74ivm")
+theme_override_font_sizes/font_size = 35
 text = "Person2"
 
 [node name="Choose1" type="Button" parent="PopUpPeople"]
@@ -3276,6 +3369,7 @@ offset_left = -33.0
 offset_top = -34.0
 offset_right = 145.0
 offset_bottom = 396.0
+theme = SubResource("Theme_johj2")
 
 [node name="profile" type="Sprite2D" parent="DisplayRoomLeft_Control"]
 
@@ -3285,6 +3379,8 @@ offset_left = -6.0
 offset_top = 50.0
 offset_right = 121.0
 offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("7_74ivm")
+theme_override_font_sizes/font_size = 30
 
 [node name="EvictLeft" type="Button" parent="DisplayRoomLeft_Control"]
 layout_mode = 0
@@ -3292,6 +3388,9 @@ offset_left = 8.0
 offset_top = 334.0
 offset_right = 117.0
 offset_bottom = 366.0
+theme = SubResource("Theme_g8txi")
+theme_override_fonts/font = ExtResource("7_74ivm")
+theme_override_font_sizes/font_size = 30
 text = "EVICT"
 
 [node name="DisplayRoomRight_Control" type="Control" parent="."]
@@ -3308,6 +3407,7 @@ offset_left = -33.0
 offset_top = -34.0
 offset_right = 145.0
 offset_bottom = 396.0
+theme = SubResource("Theme_6etj2")
 
 [node name="profile" type="Sprite2D" parent="DisplayRoomRight_Control"]
 
@@ -3317,6 +3417,8 @@ offset_left = -6.0
 offset_top = 50.0
 offset_right = 121.0
 offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("7_74ivm")
+theme_override_font_sizes/font_size = 30
 
 [node name="EvictRight" type="Button" parent="DisplayRoomRight_Control"]
 layout_mode = 0
@@ -3324,6 +3426,9 @@ offset_left = 3.0
 offset_top = 337.0
 offset_right = 112.0
 offset_bottom = 369.0
+theme = SubResource("Theme_2pux4")
+theme_override_fonts/font = ExtResource("7_74ivm")
+theme_override_font_sizes/font_size = 30
 text = "EVICT"
 
 [node name="Node2D" type="Node2D" parent="."]
