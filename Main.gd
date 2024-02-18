@@ -50,7 +50,7 @@ func createRandomPerson():
 	
 	return [p1, p2]
 
-var happiness = 0
+var happiness = 1
 var money = 0
 
 func _on_button_pressed():
@@ -154,8 +154,8 @@ func update_averages():
 		happiness = total_happiness / num_persons
 		money = total_money / num_persons
 	else:
-		happiness = 0
-		money = 0
+		happiness = happiness
+		money = money
 		
 	var hBar = $CanvasLayer/Happiness
 	hBar.value = 100 * happiness
