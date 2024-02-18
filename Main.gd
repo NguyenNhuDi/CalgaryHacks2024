@@ -1,15 +1,17 @@
 extends Node2D
 var Person_Obj = preload("res://Person_Obj.gd")
 
-var name_path = {"Bartu": "res://assets/Characters/tile000.png", "Di":"res://assets/Characters/tile001.png", "Brett":"res://assets/Characters/tile002.png", "Taylor":"res://assets/Characters/tile003.png", "Lucy":"res://assets/Characters/tile005.png", "Emma":"res://assets/Characters/tile007.png", "Liam":"res://assets/Characters/tile004.png", "Olivia":"res://assets/Characters/tile016.png", "Noah": "res://assets/Characters/tile006.png", "Ava": "res://assets/Characters/tile019.png", "William": "res://assets/Characters/tile008.png", "James": "res://assets/Characters/tile009.png", "Benjamin": "res://assets/Characters/tile010.png", "Elijah": "res://assets/Characters/tile011.png", "Lucas": "res://assets/Characters/tile012.png", "Andrew": "res://assets/Characters/tile013.png", "Joshua": "res://assets/Characters/tile014.png", "Nicholas": "res://assets/Characters/tile015.png", "Ryan": "res://assets/Characters/tile017.png", "Tyler": "res://assets/Characters/tile018.png"}
-var names = ["Bartu", "Di", "Brett", "Taylor", "Lucy", "Emma", "Liam", "Olivia", "Noah", "Ava", "William", "James", "Benjamin", "Elijah", "Lucas", "Andrew", "Joshua", "Nicholas", "Ryan", "Tyler"]
+var name_path = {"Bartu": "res://assets/Characters/tile000.png", "Di":"res://assets/Characters/tile001.png", "Brett":"res://assets/Characters/tile002.png", "Taylor":"res://assets/Characters/tile003.png", "Lucy":"res://assets/Characters/tile005.png", "Emma":"res://assets/Characters/tile007.png", "Liam":"res://assets/Characters/tile004.png", "Olivia":"res://assets/Characters/tile016.png", "Noah": "res://assets/Characters/tile006.png", "Ava": "res://assets/Characters/tile019.png", "William": "res://assets/Characters/tile008.png", "James": "res://assets/Characters/tile009.png", "Benjamin": "res://assets/Characters/tile010.png", "Elijah": "res://assets/Characters/tile011.png", "Andrew": "res://assets/Characters/tile013.png", "Joshua": "res://assets/Characters/tile014.png", "Nicholas": "res://assets/Characters/tile015.png", "Ryan": "res://assets/Characters/tile017.png", "Tyler": "res://assets/Characters/tile018.png"}
+var profileName_path = {"Bartu": "res://assets/PortraitsFinal/Luimberjack.png", "Di":"res://assets/PortraitsFinal/old_man.png", "Brett":"res://assets/PortraitsFinal/Boy.png", "Taylor":"res://assets/PortraitsFinal/Girl.png", "Lucy":"res://assets/PortraitsFinal/Lady.png", "Emma":"res://assets/PortraitsFinal/Lady2.png", "Liam":"res://assets/PortraitsFinal/Glasses.png", "Olivia":"res://assets/PortraitsFinal/Girl2.png", "Noah": "res://assets/PortraitsFinal/old_man2.png", "Ava": "res://assets/PortraitsFinal/Kid2.png", "William": "res://assets/PortraitsFinal/Punk.png", "James": "res://assets/PortraitsFinal/Boy2.png", "Benjamin": "res://assets/PortraitsFinal/Goblin.png", "Elijah": "res://assets/PortraitsFinal/Knight.png", "Andrew": "res://assets/PortraitsFinal/Viking.png", "Joshua": "res://assets/PortraitsFinal/Wizard2.png", "Nicholas": "res://assets/PortraitsFinal/Detective.png", "Ryan": "res://assets/PortraitsFinal/Boy2.png", "Tyler": "res://assets/PortraitsFinal/Kid1.png"}
+var names = ["Bartu", "Di", "Brett", "Taylor", "Lucy", "Emma", "Liam", "Olivia", "Noah", "Ava", "William", "James", "Benjamin", "Elijah", "Lucas", "Andrew", "Joshua", "Nicholas", "Ryan", "Tyler", "Mauri"]
+
 var ages = [13, 34, 45, 66, 21, 25, 66, 99, 101230, 3, 5, 3434]
 var incomes = [2333, 21, 4544, 5666, 909, 4343, 95959, 20333]
 var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
 
 var elapsed_time = 0
 # TODO undo 100s wait time
-const DURATION = 100 # duration between popups
+const DURATION = 5 # duration between popups
 var popup_open = false
 
 func _process(delta):
@@ -84,7 +86,7 @@ func _ready():
 		var rName = "room_%d" % [i+1]
 		rooms[rName] = fPerson
 		
-	var b2 = Person_Obj.new("Bartu Okan", 21, 1000, 0.85)
+	var b2 = Person_Obj.new("Bartu", 21, 1000, 0.85)
 	rooms["room_1"] = b2
 		
 	
@@ -112,13 +114,6 @@ func _on_show_pop_pressed():
 func _on_exit_pressed():
 	var control = $PopUpPeople
 	control.visible = false
-
-
-func _on_room_1_pressed():
-	var r1 = "room_1"
-	var person = rooms[r1]
-	
-	print("Name: ", person.pName)
 	
 
 func update_averages():
@@ -162,18 +157,18 @@ func _on_choose_1_pressed():
 		var random_room = unoccupied_rooms[randi() % unoccupied_rooms.size()]
 		store_person_in_room(p1, random_room)
 		popup_open = false
-		var texture = name_path[p1.pName]
-		var path = preload(texture)
-		#var texture = preload("res://assets/Characters/tile001.png")
+		var path = name_path[p1.pName]
+		#var path = preload(texture)
+		var texture = load(path)
 
 		# Create a Sprite2D node and set the texture
 		var sprite = Sprite2D.new()
 		sprite.texture = texture
-
-		# Hard code the position for the sprite
+#
+		## Hard code the position for the sprite
 		sprite.position = Vector2(100, 100)  # Adjust the position as needed
-
-		# Add the sprite as a child of the current node (assuming this script is attached to a node)
+#
+		## Add the sprite as a child of the current node (assuming this script is attached to a node)
 		add_child(sprite)
 		
 		update_averages()  
@@ -190,9 +185,8 @@ func _on_choose_2_pressed():
 		store_person_in_room(p2, random_room)
 	
 		popup_open = false
-		var texture = name_path[p2.pName]
-		var path = preload(texture)
-		#var texture = preload("res://assets/Characters/tile001.png")
+		var path = name_path[p2.pName]
+		var texture = load(path)
 
 		# Create a Sprite2D node and set the texture
 		var sprite = Sprite2D.new()
@@ -251,7 +245,7 @@ func displayLeftProfile(room_name):
 		stats.text = "Room: " + str(room_name[-1]) +  "\nName: " + pName + "\nAge: " + str(age) + "\nIncome: " + str(income) + "\nHappiness: " + str(happiness) + "\n"
 		
 		if pName != "null":
-			profile.texture = load("res://assets/PortraitsFinal/Boy2.png")
+			profile.texture = load(profileName_path[pName])
 		else:
 			profile.texture = null
 		profile.global_scale.x *= 2
@@ -295,7 +289,7 @@ func displayRightProfile(room_name):
 		
 		
 		if pName != "null":
-			profile.texture = load("res://assets/PortraitsFinal/Boy2.png")
+			profile.texture = load(profileName_path[pName])
 		else:
 			profile.texture = null		
 		profile.global_scale.x *= 2
