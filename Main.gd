@@ -1,7 +1,10 @@
 extends Node2D
 var Person_Obj = preload("res://Person_Obj.gd")
 
-var names = ["Bartu", "Di", "Brett", "Taylor", "Lucy"]
+
+var name_path = {"Bartu": "res://assets/Characters/tile000.png", "Di":"res://assets/Characters/tile001.png", "Brett":"res://assets/Characters/tile002.png", "Taylor":"res://assets/Characters/tile003.png", "Lucy":"res://assets/Characters/tile005.png", "Emma":"res://assets/Characters/tile007.png", "Liam":"res://assets/Characters/tile004.png", "Olivia":"res://assets/Characters/tile016.png", "Noah": "res://assets/Characters/tile006.png", "Ava": "res://assets/Characters/tile019.png", "William": "res://assets/Characters/tile008.png", "James": "res://assets/Characters/tile009.png", "Benjamin": "res://assets/Characters/tile010.png", "Elijah": "res://assets/Characters/tile011.png", "Lucas": "res://assets/Characters/tile012.png", "Andrew": "res://assets/Characters/tile013.png", "Joshua": "res://assets/Characters/tile014.png", "Nicholas": "res://assets/Characters/tile015.png", "Ryan": "res://assets/Characters/tile017.png", "Tyler": "res://assets/Characters/tile018.png"}
+var names = ["Bartu", "Di", "Brett", "Taylor", "Lucy", "Emma", "Liam", "Olivia", "Noah", "Ava", "William", "James", "Benjamin", "Elijah", "Lucas", "Andrew", "Joshua", "Nicholas", "Ryan", "Tyler"]
+
 var ages = [13, 34, 45, 66, 21, 25, 66, 99, 101230, 3, 5, 3434]
 var incomes = [2333, 21, 4544, 5666, 909, 4343, 95959, 20333]
 var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
@@ -10,11 +13,70 @@ var elapsed_time = 0
 const DURATION = 5 # duration between popups
 var popup_open = false
 
+var rooms = {}
+var fPerson = Person_Obj.new("null", -1, -1, 0)
+
+var room1coord = [340, 485, 220]
+var room2coord = [340, 485, 350]
+var room3coord = [340, 485, 478]
+var room4coord = [655, 805, 220]
+var room5coord = [655, 805, 350]
+var room6coord = [655, 805, 478]
+
+func spawnSprite(person: Person, room: String):
+	
+	
+	
+	var name_index = names.find(person.pName)
+	
+
+
+	var personSprite = $Node2D.get_child(names.find(person.pName))
+	
+	var room_number = int(room[-1])
+	
+	match room_number:
+		1:
+			personSprite.position.x = (room1coord[0] + room1coord[1]) / 2
+			personSprite.position.y = room1coord[2]
+		2:
+			personSprite.position.x = (room2coord[0] + room2coord[1]) / 2
+			personSprite.position.y = room2coord[2]
+		3:
+			personSprite.position.x = (room3coord[0] + room3coord[1]) / 2
+			personSprite.position.y = room3coord[2]
+		4:
+			personSprite.position.x = (room4coord[0] + room4coord[1]) / 2
+			personSprite.position.y = room4coord[2]
+		5:
+			personSprite.position.x = (room5coord[0] + room5coord[1]) / 2
+			personSprite.position.y = room5coord[2]
+		6:
+			personSprite.position.x = (room6coord[0] + room6coord[1]) / 2
+			personSprite.position.y = room6coord[2]
+		_:
+			print("Such room dont exist??")
+			
+	personSprite.scale = Vector2(2,2)
+
+	personSprite.visible = true
+	
+	
+	var tile = "tile" + str(names.find(person.pName))
+	
+	$Node2D/AnimationPlayer.play(tile)
+	
+
+
+
 var moveDirection := 1 # 1 for moving right, -1 for moving left
 var moveAmount := 0.5
 
-var room1_x_min = 330
-var room1_x_max = 480
+
+#these room coord arrays are in the format of [x_min, x_max, y]
+
+
+
 
 func _process(delta):
 	#if popup_open == false:
@@ -25,18 +87,51 @@ func _process(delta):
 		#print("timer called")
 		#elapsed_time = 0
 	
-	
-		
-	if($Node2D/Sprite2D.visible):
-		# Move the sprite by moveAmount pixels in the current direction
-		$Node2D/Sprite2D.position.x += moveAmount * moveDirection
-	
-	# Check if the sprite has reached the desired distance
-		if  room1_x_min >= $Node2D/Sprite2D.position.x || room1_x_max <= $Node2D/Sprite2D.position.x:
-		# If so, change the direction
-			moveDirection *= -1
-			$Node2D/Sprite2D.scale.x *= -1
-		
+	#Assuming 6 rooms
+	for room in rooms.keys():
+
+		if(rooms[room] != fPerson):
+			var personInRoom = rooms[room]
+
+			
+			var name_index = names.find(personInRoom.pName)
+			
+			
+			var personSprite = $Node2D.get_child(name_index)
+			
+			
+			
+			var room_number = int(room[-1])
+			var room_x_min: int
+			var room_x_max: int
+			match room_number:
+				1:
+					room_x_min = room1coord[0]
+					room_x_max = room1coord[1]
+				2:
+					room_x_min = room2coord[0]
+					room_x_max = room2coord[1]
+				3:
+					room_x_min = room3coord[0]
+					room_x_max = room3coord[1]
+				4:
+					room_x_min = room4coord[0]
+					room_x_max = room4coord[1]
+				5:
+					room_x_min = room5coord[0]
+					room_x_max = room5coord[1]
+				6:
+					room_x_min = room6coord[0]
+					room_x_max = room6coord[1]
+				_:
+					print("Such room dont exist??")
+					
+			personSprite.position.x += moveAmount * moveDirection
+			
+			if  room_x_min >= personSprite.position.x || room_x_max <= personSprite.position.x:
+				moveDirection *= -1
+				personSprite.scale.x *= -1
+			
 	
 
 #Returns a list [p1, p2] where p1 and p2 are person objects
@@ -89,8 +184,7 @@ func _on_button_pressed():
 	
 	print("\n\n\n")
 	
-var rooms = {}
-var fPerson = Person_Obj.new("null", -1, -1, 0)
+
 
 
 func store_person_in_room(person:Person, room:String):
@@ -106,7 +200,7 @@ func remove_person_in_room(room:String):
 func _ready():
 	# initialize rooms:
 	for i in range(6):
-		var rName = "room_%d" % [i]
+		var rName = "room_%d" % [i+1]
 		rooms[rName] = fPerson
 		
 	var b2 = Person_Obj.new("Bartu", 21, 2000, 0.001)
@@ -203,18 +297,6 @@ func update_averages():
 	# $MoneyLabel.text = str(money)
 
 
-func spawnSprite(person: Person, room: String):
-
-	$Node2D/Sprite2D.visible = true
-	
-	$Node2D/Sprite2D.position.x = 350
-	$Node2D/Sprite2D.position.y = 220
-	
-	$Node2D/Sprite2D.scale = Vector2(2,2)
-	
-	$Node2D/AnimationPlayer.play("tile0")
-	
-
 
 	
 	
@@ -229,8 +311,10 @@ func _on_choose_1_pressed():
 	
 
 
-var b2 = Person.new("Bartu", 3, 2, 0.3)
+
 
 func _on_plsworkgod_pressed():
-	spawnSprite(b2, "room_2")
+	var b2 = Person.new("Ava", 3, 2, 0.3)
+	store_person_in_room(b2, "room_6")
+	spawnSprite(b2, "room_6")
 	print("HELLOOOOOOOOOOOOOOOO")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dviyy8apaotba"
-path="res://.godot/imported/tile016.png-6dcf6f1ca1afde64916247e782ccf8c5.ctex"
+uid="uid://dgmufrqlhsxow"
+path="res://.godot/imported/tile002.png-9224f7556eb6b3695439349225e1226a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/CharacterAnims/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile016.png"
-dest_files=["res://.godot/imported/tile016.png-6dcf6f1ca1afde64916247e782ccf8c5.ctex"]
+source_file="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile002.png"
+dest_files=["res://.godot/imported/tile002.png-9224f7556eb6b3695439349225e1226a.ctex"]
 
 [params]
 
