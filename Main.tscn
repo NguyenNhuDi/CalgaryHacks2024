@@ -966,6 +966,16 @@ offset_right = 919.0
 offset_bottom = 612.0
 script = SubResource("GDScript_4ykdy")
 
+[node name="Panel" type="Panel" parent="PopUpPeople"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.105
+anchor_bottom = 0.221
+offset_left = 42.0
+offset_top = 80.0
+offset_right = 582.29
+offset_bottom = 378.522
+
 [node name="Person1" type="Label" parent="PopUpPeople"]
 layout_mode = 0
 offset_left = 75.0
@@ -999,6 +1009,7 @@ offset_bottom = 472.0
 text = "Choose this person"
 
 [node name="DisplayRoom1" type="Button" parent="."]
+visible = false
 visibility_layer = 0
 offset_left = 323.0
 offset_top = 118.0
@@ -1006,6 +1017,7 @@ offset_right = 511.0
 offset_bottom = 241.0
 
 [node name="DisplayRoom2" type="Button" parent="."]
+visible = false
 visibility_layer = 0
 offset_left = 324.0
 offset_top = 243.0
