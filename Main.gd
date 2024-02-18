@@ -96,10 +96,6 @@ func _ready():
 		var rName = "room_%d" % [i]
 		rooms[rName] = fPerson
 	
-	if GameState.action_count > 3:
-		# Reset action count for a new day or handle as necessary
-		GameState.update_action_count(0)
-		# Update scene or UI based on the new game state
 	
 var p1 :Person
 var p2 :Person
@@ -136,13 +132,13 @@ func _on_room_1_pressed():
 var avg_happiness = GameState.get_happiness()
 var avg_money = GameState.get_money()
 
+var avg_happiness = GameState.get_happiness()
+var avg_money = GameState.get_money()
+
 func update_averages():
 	var total_happiness = 0.0
 	var total_money = 0
 	var num_persons = 0
-
-	# Initialize avg_happiness and avg_money at the beginning
-	
 
 	for room in rooms.values():
 		if room != fPerson:  # Assuming fPerson is your 'empty' person
@@ -171,6 +167,10 @@ func update_averages():
 
 	#print("Happiness: ", happiness)
 	#print("Money Percentage: ", money_percentage)
+	print(avg_money)
+	if happiness < 0.2 || money < 0: # temporary game over condition
+		# game ova
+		game_over()
 
 
 	# Optionally, update any UI elements or notify other parts of your game
