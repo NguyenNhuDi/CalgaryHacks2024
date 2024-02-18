@@ -9,6 +9,7 @@ var names = ["Bartu", "Di", "Brett", "Taylor", "Joshua", "Emma", "Liam", "Olivia
 var ages = [13, 34, 45, 66, 21, 25, 66, 99, 101230, 3, 5, 3434]
 var incomes = [2333, 21, 4544, 5666, 909, 4343, 959, 333]
 var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
+var max_quota = 50000.0
 
 var elapsed_time = 0
 # TODO undo 100s wait time
@@ -16,7 +17,7 @@ const DURATION = 10 # duration between popups
 var popup_open = false
 var dayOverWaitTime = 5
 
-var daily_quota = 1000 # can change, plus is updated dynamically in check_actions...????
+var daily_quota = GameState.get_quota() # can change, plus is updated dynamically in check_actions...????
 
 var rooms = {}
 #var fPerson = GameState.get_fake_person()
@@ -201,8 +202,16 @@ func _ready():
 
 	var lControl = $DisplayRoomLeft_Control
 	var rControl = $DisplayRoomRight_Control
+	var moneyBar = $CanvasLayer/Money/Line2D
+	
+	var percent = 310 * daily_quota / max_quota
+	
+	
+	moneyBar.position.x = percent
+	
 	lControl.visible = false
 	rControl.visible = false
+	
 	
 	if GameState.firstDay:
 		rooms = GameState.init_rooms()	
@@ -284,7 +293,7 @@ func update_averages():
 	var updated_money = GameState.get_money()
 
 	# Calculate money as a percentage of 150,000
-	var money_percentage = min((updated_money / 50000.0) * 100, 100)  # Ensure it doesn't exceed 100%
+	var money_percentage = min((total_money / max_quota) * 100, 100)  # Ensure it doesn't exceed 100%
 
 	# Update UI elements or other game parts with the new values
 	$CanvasLayer/Happiness.value = updated_happiness * 100  # Convert to percentage if needed
@@ -471,11 +480,11 @@ func _on_evict_left_pressed():
 	var personName = rooms[rName].pName
 	
 	if personName != "null":
-		rooms[rName] = GameState.get_fake_person()
 		var name_index = names.find(personName)
 		var personSprite = $Node2D.get_child(name_index)
 		personSprite.visible = false
-		
+	
+	rooms[rName] = GameState.get_fake_person()
 	displayLeftProfile(rName)
 	
 func _on_evict_right_pressed():
@@ -485,18 +494,20 @@ func _on_evict_right_pressed():
 	var personName = rooms[rName].pName
 	
 	if personName != "null":
-		rooms[rName] = GameState.get_fake_person()
 		var name_index = names.find(personName)
 		var personSprite = $Node2D.get_child(name_index)
 		personSprite.visible = false
-		displayRightProfile(rName)
 
+	rooms[rName] = GameState.get_fake_person()
+	displayRightProfile(rName)
+	
 
 func check_actions_and_switch_scene():
 	if action_count == 3:
 		# subtract the quota from profit then update the quota 
 		avg_money -= daily_quota
 		GameState.update_money(avg_money)
+		GameState.set_quota(daily_quota * 1.5)
 
 		if !check_game_over_state():
 			var timer = Timer.new()

@@ -9,11 +9,18 @@ var action_count = 0
 var rooms = {}
 var fPerson = Person_Obj.new("null", -1, -1, 0)
 var firstDay = true
+var dailyQuota : float = 1000
 
 func init_rooms():
 	for i in range(6):
 		rooms["room_"+str(i+1)] = fPerson
 	return rooms
+	
+func get_quota():
+	return dailyQuota
+
+func set_quota(nQuota):
+	dailyQuota = nQuota
 
 func get_rooms():
 	return rooms
