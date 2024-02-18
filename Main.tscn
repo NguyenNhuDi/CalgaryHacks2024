@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmad46vkfo8jg"]
+[gd_scene load_steps=12 format=3 uid="uid://dmg1ca2s3d5gr"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
 [ext_resource type="Script" path="res://ProgressBar.gd" id="2_wyxhy"]
@@ -945,12 +945,6 @@ expand_mode = 1
 
 [node name="building_tilemaps2" type="CanvasLayer" parent="."]
 
-[node name="CanvasLayer3#DisplayRoom1" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="PopUpPeople" type="Control" parent="."]
 z_index = 9
 layout_mode = 3
@@ -1001,19 +995,27 @@ offset_right = 704.0
 offset_bottom = 54.0
 text = "X"
 
-[node name="CanvasLayer3_DisplayRoom1#Room1" type="Button" parent="."]
-visibility_layer = 0
-offset_left = 326.0
-offset_top = 138.0
-offset_right = 514.0
-offset_bottom = 261.0
-
 [node name="ShowPop" type="Button" parent="."]
 offset_left = 1058.0
 offset_top = 334.0
 offset_right = 1114.0
 offset_bottom = 387.0
 text = "show"
+
+[node name="DisplayRoom1" type="Button" parent="."]
+visibility_layer = 0
+offset_left = 323.0
+offset_top = 118.0
+offset_right = 511.0
+offset_bottom = 241.0
+
+[node name="DisplayRoom1_Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 169.0
+offset_top = 103.0
+offset_right = 314.0
+offset_bottom = 243.0
 
 [connection signal="pressed" from="GenPerson" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose1" to="." method="_on_choose_1_pressed"]
