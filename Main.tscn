@@ -1,7 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cmad46vkfo8jg"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
-[ext_resource type="Script" path="res://ProgressBar.gd" id="2_wyxhy"]
 [ext_resource type="Script" path="res://Money.gd" id="3_sexvi"]
 [ext_resource type="Texture2D" uid="uid://budr4a53fhbkl" path="res://assets/sky_background.jpg" id="4_kafs0"]
 [ext_resource type="Texture2D" uid="uid://bo62tcux5ul8l" path="res://assets/grass_tileset.png" id="5_cb7xc"]
@@ -770,6 +769,20 @@ texture = ExtResource("5_wbucn")
 [sub_resource type="TileSet" id="TileSet_fgflw"]
 sources/0 = SubResource("TileSetAtlasSource_i26cf")
 
+[sub_resource type="GDScript" id="GDScript_ghtrh"]
+script/source = "extends ProgressBar
+
+
+func _ready():
+	update()
+	
+	
+func update():
+	value = get_parent().get_parent().happiness
+	
+	
+"
+
 [sub_resource type="GDScript" id="GDScript_4ykdy"]
 script/source = "extends Control
 
@@ -900,7 +913,7 @@ offset_right = 344.0
 offset_bottom = 68.0
 value = 100.0
 show_percentage = false
-script = ExtResource("2_wyxhy")
+script = SubResource("GDScript_ghtrh")
 
 [node name="Label" type="Label" parent="CanvasLayer/Happiness"]
 layout_mode = 0

@@ -23,10 +23,6 @@ func update_money(new_money):
 	
 func get_money():
 	return money
-	
-# Function to update action count
-func update_action_count(new_count):
-	action_count = new_count
 
 # Reset function if needed to reset the game state
 func reset_game_state():

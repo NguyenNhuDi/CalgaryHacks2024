@@ -254,6 +254,18 @@ func _on_display_room_2_pressed():
 	
 	p2_on = displayProfile(p, pic, label, "room_2", p2_on)
 
+# Assuming Godot 4.0
 func check_actions_and_switch_scene():
-	if action_count > 3:
-		get_tree().change_scene_to_file("res://new_day.tscn")
+	if action_count == 3:
+		var timer = Timer.new()
+		timer.wait_time = 10
+		timer.one_shot = true
+		add_child(timer)
+		# Use Callable for connecting in Godot 4.0
+		timer.connect("timeout", Callable(self, "_on_timer_timeout"))
+		timer.start()
+
+func _on_timer_timeout():
+	get_tree().change_scene_to_file("res://new_day.tscn")
+	# In Godot 4.0, you might not need to manually remove the Timer node if it's one_shot and auto-free on timeout is set
+
