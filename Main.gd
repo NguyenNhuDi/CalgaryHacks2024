@@ -11,13 +11,14 @@ const DURATION = 5 # duration between popups
 var popup_open = false
 
 func _process(delta):
-	if popup_open == false:
-		elapsed_time += delta
-		
-	if elapsed_time >= DURATION:
-		_on_show_pop_pressed()
-		print("timer called")
-		elapsed_time = 0
+	#if popup_open == false:
+		#elapsed_time += delta
+		#
+	#if elapsed_time >= DURATION:
+		#_on_show_pop_pressed()
+		#print("timer called")
+		#elapsed_time = 0
+	pass
 		
 		
 	
@@ -113,12 +114,8 @@ func _on_show_pop_pressed():
 	var GenButton = $GenPerson
 	var ShowButton = $ShowPop
 
-	var BuildingTilemaps = $building_tilemaps
-	var bg = $building_tilemaps/bg_tilemap
-	var fg = $building_tilemaps/fg_tilemap
-	BuildingTilemaps.visible = false
-	bg.visible = false
-	fg.visible = false
+	#var BuildingTilemaps = $building_tilemaps
+	#BuildingTilemaps.visible = false
 
 	
 	GenButton.visible = false
@@ -149,14 +146,10 @@ func _on_exit_pressed():
 	control.visible = false
 
 
-func _on_choose_1_pressed():
-	store_person_in_room(p1, "room_2")
-	popup_open = false
-	_on_exit_pressed()
-	
-
 
 func _on_choose_2_pressed():
+	print("s3w4edr5ftgyhuji")
+	
 	store_person_in_room(p2, "room_2")
 	popup_open = false
 	_on_exit_pressed()
@@ -190,3 +183,11 @@ func update_averages():
 	# For example:
 	# $HappinessBar.value = happiness
 	# $MoneyLabel.text = str(money)
+
+
+func _on_choose_1_pressed():
+	print("s3w4edr5ftgyhuji")
+	store_person_in_room(p1, "room_2")
+	popup_open = false
+	_on_exit_pressed()
+	
