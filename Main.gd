@@ -33,7 +33,6 @@ func createRandomPerson():
 	var p1 = Person_Obj.new(rand_name1, rand_age1, rand_income1, rand_happiness1)  
 	var p2 = Person_Obj.new(rand_name2, rand_age2, rand_income2, rand_happiness2)  
 	
-
 	return [p1, p2]
 
 var happiness = 33.33
@@ -92,6 +91,46 @@ func _ready():
 	print("Person in room_2:")
 	print(rooms["room_2"].pName)
 	
-	remove_person_in_room("room_10")
+var p1 :Person
+var p2 :Person
+func _on_show_pop_pressed():
+	var control = $PopUpPeople
+	var GenButton = $GenPerson
+	var ShowButton = $ShowPop
 	
-		
+	GenButton.visible = false
+	ShowButton.visible = false	
+	
+	control.visible = true
+	
+	var two_people = createRandomPerson()
+	
+	var Person1 = $PopUpPeople/Person1
+	Person1.text = "P1 attributes:\n" + "Name: " + two_people[0].pName + "\nAge: " + str(two_people[0].age) + "\nIncome: " + str(two_people[0].income) + "\nHappiness: " + str(two_people[0].happiness)
+	
+	var Person2 = $PopUpPeople/Person2
+	Person2.text = "P2 attributes:\n" + "Name: " + two_people[1].pName + "\nAge: " + str(two_people[1].age) + "\nIncome: " + str(two_people[1].income) + "\nHappiness: " + str(two_people[1].happiness)
+	
+	p1 = two_people[0]
+	p2 = two_people[1]
+	
+
+func _on_exit_pressed():
+	var control = $PopUpPeople
+	var GenButton = $GenPerson
+	var ShowButton = $ShowPop
+	
+	GenButton.visible = true
+	ShowButton.visible = true	
+	control.visible = false
+
+
+func _on_choose_1_pressed():
+	store_person_in_room(p1, "room_2")
+	_on_exit_pressed()
+
+
+func _on_choose_2_pressed():
+	store_person_in_room(p2, "room_2")
+	_on_exit_pressed()
+

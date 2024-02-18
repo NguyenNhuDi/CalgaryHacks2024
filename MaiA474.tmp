@@ -185,5 +185,4 @@ text = "X"
 [connection signal="pressed" from="GenPerson" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="ShowPop" to="." method="_on_show_pop_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose1" to="." method="_on_choose_1_pressed"]
-[connection signal="pressed" from="PopUpPeople/Choose2" to="." method="_on_choose_2_pressed"]
 [connection signal="pressed" from="PopUpPeople/Exit" to="." method="_on_exit_pressed"]
