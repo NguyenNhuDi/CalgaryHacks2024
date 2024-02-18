@@ -6,7 +6,21 @@ var ages = [13, 34, 45, 66, 21, 25, 66, 99, 101230, 3, 5, 3434]
 var incomes = [2333, 21, 4544, 5666, 909, 4343, 95959, 20333]
 var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
 
+var elapsed_time = 0
+const DURATION = 5 # duration between popups
+var popup_open = false
 
+func _process(delta):
+	if popup_open == false:
+		elapsed_time += delta
+		
+	if elapsed_time >= DURATION:
+		_on_show_pop_pressed()
+		print("timer called")
+		elapsed_time = 0
+		
+		
+	
 
 #Returns a list [p1, p2] where p1 and p2 are person objects
 #GDScript doesnt have tuples so i needed to use list of 2.
@@ -94,9 +108,18 @@ func _ready():
 var p1 :Person
 var p2 :Person
 func _on_show_pop_pressed():
+	popup_open = true
 	var control = $PopUpPeople
 	var GenButton = $GenPerson
 	var ShowButton = $ShowPop
+
+	var BuildingTilemaps = $building_tilemaps
+	var bg = $building_tilemaps/bg_tilemap
+	var fg = $building_tilemaps/fg_tilemap
+	BuildingTilemaps.visible = false
+	bg.visible = false
+	fg.visible = false
+
 	
 	GenButton.visible = false
 	ShowButton.visible = false	
@@ -114,6 +137,7 @@ func _on_show_pop_pressed():
 	p1 = two_people[0]
 	p2 = two_people[1]
 	
+	
 
 func _on_exit_pressed():
 	var control = $PopUpPeople
@@ -127,11 +151,14 @@ func _on_exit_pressed():
 
 func _on_choose_1_pressed():
 	store_person_in_room(p1, "room_2")
+	popup_open = false
 	_on_exit_pressed()
+	
 
 
 func _on_choose_2_pressed():
 	store_person_in_room(p2, "room_2")
+	popup_open = false
 	_on_exit_pressed()
 
 func update_averages():
