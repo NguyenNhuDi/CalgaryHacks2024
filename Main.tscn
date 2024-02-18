@@ -1,11 +1,24 @@
 [gd_scene load_steps=12 format=3 uid="uid://cmad46vkfo8jg"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
-[ext_resource type="Script" path="res://ProgressBar.gd" id="2_wyxhy"]
 [ext_resource type="Script" path="res://Money.gd" id="3_sexvi"]
 [ext_resource type="Texture2D" uid="uid://budr4a53fhbkl" path="res://assets/sky_background.jpg" id="4_kafs0"]
 [ext_resource type="Texture2D" uid="uid://bo62tcux5ul8l" path="res://assets/grass_tileset.png" id="5_cb7xc"]
 [ext_resource type="Texture2D" uid="uid://demxptcl3jkul" path="res://assets/PixelSpaces_Free_Pack/PixelSpaces Free Pack.png" id="5_wbucn"]
+
+[sub_resource type="GDScript" id="GDScript_xy1l0"]
+script/source = "extends ProgressBar
+
+
+func _ready():
+	update()
+	
+	
+func update():
+	value = get_parent().get_parent().happiness
+	
+	
+"
 
 [sub_resource type="GDScript" id="GDScript_4ykdy"]
 script/source = "extends Control
@@ -858,7 +871,7 @@ offset_right = 344.0
 offset_bottom = 68.0
 value = 100.0
 show_percentage = false
-script = ExtResource("2_wyxhy")
+script = SubResource("GDScript_xy1l0")
 
 [node name="Label" type="Label" parent="CanvasLayer/Happiness"]
 layout_mode = 0
@@ -1016,8 +1029,22 @@ scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_fgflw")
 format = 2
 
+[node name="CanvasLayer3#DisplayRoom1" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer3_DisplayRoom1#Room1" type="Button" parent="."]
+visibility_layer = 0
+offset_left = 326.0
+offset_top = 138.0
+offset_right = 514.0
+offset_bottom = 261.0
+
 [connection signal="pressed" from="GenPerson" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="ShowPop" to="." method="_on_show_pop_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose1" to="." method="_on_choose_1_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose2" to="." method="_on_choose_2_pressed"]
 [connection signal="pressed" from="PopUpPeople/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Test Button" to="." method="_on_test_button_pressed"]

@@ -8,6 +8,7 @@ var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
 
 
 
+
 #Returns a list [p1, p2] where p1 and p2 are person objects
 #GDScript doesnt have tuples so i needed to use list of 2.
 
@@ -78,18 +79,17 @@ func _ready():
 		var rName = "room_%d" % [i]
 		rooms[rName] = fPerson
 		
-	var b2 = Person_Obj.new("Bartu", 21, 2000, 0.001)
+	var b2 = Person_Obj.new("Bartu", 21, 100, 0.75)
 	
 	store_person_in_room(b2, "room_2")
 	
 	print("Person in room_2:")
 	print(rooms["room_2"].pName)
 	
-	print("removing person...")
-	remove_person_in_room("room_2")
+	var test_character = Person_Obj.new("TestMan", 20, 50, 0.50)
 	
-	print("Person in room_2:")
-	print(rooms["room_2"].pName)
+	store_person_in_room(test_character, "room_1")
+	update_averages()
 	
 var p1 :Person
 var p2 :Person
@@ -134,6 +134,13 @@ func _on_choose_2_pressed():
 	store_person_in_room(p2, "room_2")
 	_on_exit_pressed()
 
+
+
+func _on_room_1_pressed():
+	var r1 = "room_1"
+	var person = rooms[r1]
+	
+	print("Name: ", person.pName)
 func update_averages():
 	var total_happiness = 0.0
 	var total_money = 0
@@ -141,6 +148,9 @@ func update_averages():
 
 	for room in rooms.values():
 		if room != fPerson:  # Assuming fPerson is your 'empty' person
+			if room.pName == "null":
+				continue
+			print(room.pName, "room names")
 			total_happiness += room.happiness
 			total_money += room.income
 			num_persons += 1
@@ -148,11 +158,16 @@ func update_averages():
 	if num_persons > 0:
 		happiness = total_happiness / num_persons
 		money = total_money / num_persons
+		print(happiness)
 	else:
 		happiness = 0
 		money = 0
+		
+	var hBar = $CanvasLayer/Happiness
+	hBar.value = 100 * happiness	
 
-	# Optionally, update any UI elements or notify other parts of your game
-	# For example:
-	# $HappinessBar.value = happiness
-	# $MoneyLabel.text = str(money)
+
+
+
+func _on_test_button_pressed():
+	createRandomPerson()
