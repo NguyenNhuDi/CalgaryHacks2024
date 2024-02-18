@@ -161,6 +161,13 @@ func _on_choose_2_pressed():
 	popup_open = false
 	_on_exit_pressed()
 
+
+
+func _on_room_1_pressed():
+	var r1 = "room_1"
+	var person = rooms[r1]
+	
+	print("Name: ", person.pName)
 func update_averages():
 	var total_happiness = 0.0
 	var total_money = 0
