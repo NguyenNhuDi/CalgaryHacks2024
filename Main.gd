@@ -118,10 +118,6 @@ func _on_show_pop_pressed():
 	
 	
 
-func _on_exit_pressed():
-	var control = $PopUpPeople
-	control.visible = false
-
 
 func _on_room_1_pressed():
 	var r1 = "room_1"
@@ -129,9 +125,6 @@ func _on_room_1_pressed():
 	
 	#print("Name: ", person.pName)
 	
-var avg_happiness = GameState.get_happiness()
-var avg_money = GameState.get_money()
-
 var avg_happiness = GameState.get_happiness()
 var avg_money = GameState.get_money()
 
@@ -164,15 +157,6 @@ func update_averages():
 	$CanvasLayer/Happiness.value = updated_happiness * 100  # Convert to percentage if needed
 	$CanvasLayer/Money.value = money_percentage  # Use calculated percentage
 
-
-	#print("Happiness: ", happiness)
-	#print("Money Percentage: ", money_percentage)
-	print(avg_money)
-	if happiness < 0.2 || money < 0: # temporary game over condition
-		# game ova
-		game_over()
-
-
 	# Optionally, update any UI elements or notify other parts of your game
 	# For example:
 	# $HappinessBar.value = happiness
@@ -201,7 +185,8 @@ func _on_choose_1_pressed():
 		store_person_in_room(p1, random_room)
 		popup_open = false
 		update_averages()  # Recalculate averages if necessary
-		_on_exit_pressed()
+		var control = $PopUpPeople # exit
+		control.visible = false
 	else:
 		print("No unoccupied rooms available.")
 		
@@ -213,7 +198,8 @@ func _on_choose_2_pressed():
 		store_person_in_room(p2, random_room)
 		popup_open = false
 		update_averages()  # Recalculate averages if necessary
-		_on_exit_pressed()
+		var control = $PopUpPeople # exit
+		control.visible = false
 	else:
 		print("No unoccupied rooms available.")	
 
