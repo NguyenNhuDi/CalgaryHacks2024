@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbblxv87luikf"]
+[gd_scene load_steps=3 format=3 uid="uid://ba3p2n1yasvgw"]
 
 [ext_resource type="Script" path="res://main_menu.gd" id="1_qvlyy"]
 [ext_resource type="Texture2D" uid="uid://budr4a53fhbkl" path="res://assets/sky_background.jpg" id="2_ixxbr"]
@@ -17,6 +17,7 @@ size_flags_vertical = 4
 script = ExtResource("1_qvlyy")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = -700.0
 offset_top = -358.0
 offset_right = 691.0
