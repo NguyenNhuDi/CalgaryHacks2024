@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmad46vkfo8jg"]
+[gd_scene load_steps=12 format=3 uid="uid://dmg1ca2s3d5gr"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
 [ext_resource type="Script" path="res://ProgressBar.gd" id="2_wyxhy"]
@@ -1015,8 +1015,16 @@ offset_top = 138.0
 offset_right = 514.0
 offset_bottom = 261.0
 
+[node name="PLSWORKGOD" type="Button" parent="."]
+offset_left = 439.0
+offset_top = 111.0
+offset_right = 710.0
+offset_bottom = 227.0
+text = "PLS WORK GOD PLSSSSSSSSSSSSSSSSSSSS"
+
 [connection signal="pressed" from="PopUpPeople/Choose1" to="." method="_on_choose_1_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose2" to="." method="_on_choose_2_pressed"]
 [connection signal="pressed" from="PopUpPeople/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="ShowPop" to="." method="_on_show_pop_pressed"]
 [connection signal="pressed" from="GenPerson" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PLSWORKGOD" to="." method="_on_plsworkgod_pressed"]

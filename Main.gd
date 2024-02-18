@@ -191,3 +191,7 @@ func _on_choose_1_pressed():
 	popup_open = false
 	_on_exit_pressed()
 	
+
+
+func _on_plsworkgod_pressed():
+	print("HELLOOOOOOOOOOOOOOOO")
