@@ -211,4 +211,11 @@ func get_unoccupied_rooms():
 	return unoccupied
 	
 	
-
+func _on_display_room_1_pressed():
+	var p1 = $DisplayRoom1_Control
+	p1.visible = true
+	
+	var pic = $DisplayRoom1_Control/p1Profile
+	pic.texture = load("res://assets/PortraitsFinal/Boy2.png")
+	
+	

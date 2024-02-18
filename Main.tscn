@@ -1008,3 +1008,4 @@ offset_bottom = 243.0
 [connection signal="pressed" from="PopUpPeople/Choose1" to="." method="_on_choose_1_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose2" to="." method="_on_choose_2_pressed"]
 [connection signal="pressed" from="PopUpPeople/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="DisplayRoom1" to="." method="_on_display_room_1_pressed"]
