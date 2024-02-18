@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://cmad46vkfo8jg"]
+[gd_scene load_steps=64 format=3 uid="uid://cmad46vkfo8jg"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
 [ext_resource type="Texture2D" uid="uid://36u22hqis3kt" path="res://assets/taylor_asset_ground.png" id="3_nbdlv"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bo62tcux5ul8l" path="res://assets/grass_tileset.png" id="5_cb7xc"]
 [ext_resource type="Texture2D" uid="uid://demxptcl3jkul" path="res://assets/PixelSpaces_Free_Pack/PixelSpaces Free Pack.png" id="5_wbucn"]
 [ext_resource type="Texture2D" uid="uid://i1r1iourf0oq" path="res://assets/bg_3.jpg" id="6_l0hab"]
-[ext_resource type="FontFile" uid="uid://w06lcq0yfbpg" path="res://assets/m5x7.ttf" id="7_74ivm"]
 [ext_resource type="Texture2D" uid="uid://q83wx814ab22" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile000.png" id="7_wujq6"]
 [ext_resource type="Texture2D" uid="uid://7xak8rhvmfd5" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile001.png" id="8_nxy4g"]
 [ext_resource type="Texture2D" uid="uid://dgmufrqlhsxow" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile002.png" id="9_vhyo6"]
@@ -2406,70 +2405,6 @@ func _on_choose_1_pressed(room:String):
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fdf46"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ubp1x"]
-bg_color = Color(0.172549, 0.705882, 0.423529, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.894118, 0.898039, 0.898039, 1)
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0.0313726, 0.207843, 0.109804, 1)
-shadow_size = 4
-shadow_offset = Vector2(5, 5)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twalk"]
-bg_color = Color(0.239216, 0.607843, 1, 1)
-border_width_bottom = 8
-border_color = Color(0, 0.376471, 0.698039, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0, 0.0627451, 0.152941, 1)
-shadow_size = 4
-shadow_offset = Vector2(5, 5)
-
-[sub_resource type="Theme" id="Theme_uxpmx"]
-Button/styles/hover = SubResource("StyleBoxFlat_ubp1x")
-Button/styles/normal = SubResource("StyleBoxFlat_twalk")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pce0x"]
-bg_color = Color(0.172549, 0.705882, 0.423529, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.85098, 0.85098, 0.85098, 1)
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0.0319563, 0.209622, 0.111273, 1)
-shadow_size = 4
-shadow_offset = Vector2(5, 5)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q85xj"]
-bg_color = Color(0.239216, 0.607843, 1, 1)
-border_width_bottom = 8
-border_color = Color(0, 0.377668, 0.699674, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0, 0.0627451, 0.152941, 1)
-shadow_size = 4
-shadow_offset = Vector2(5, 5)
-
-[sub_resource type="Theme" id="Theme_o07fg"]
-Button/styles/hover = SubResource("StyleBoxFlat_pce0x")
-Button/styles/normal = SubResource("StyleBoxFlat_q85xj")
-
 [sub_resource type="Animation" id="Animation_hq36l"]
 length = 0.001
 tracks/0/type = "value"
@@ -3093,11 +3028,11 @@ format = 2
 layer_0/tile_data = PackedInt32Array(1114134, 2228224, 9, 1114135, 2293760, 9, 1114136, 2293760, 7, 1114133, 2293760, 268435463, 1114126, 2228224, 9, 1114127, 2293760, 9, 1114128, 2293760, 7, 1114125, 2293760, 268435463, 327691, 1572864, 8, 327692, 1638400, 8, 589835, 1572864, 8, 589836, 1638400, 8, 851979, 1572864, 8, 851980, 1638400, 8, 327706, 1572864, 268435464, 327705, 1638400, 268435464, 589850, 1572864, 268435464, 589849, 1638400, 268435464, 851994, 1572864, 268435464, 851993, 1638400, 268435464, 917522, 1572864, 7, 917523, 1572864, 7, 655378, 1572864, 7, 655379, 1572864, 7, 393234, 1572864, 7, 393235, 1572864, 7, 131090, 1572864, 7, 131091, 1572864, 7, 131085, 1507328, 7, 393229, 1507328, 7, 655373, 1507328, 7, 655384, 1507328, 7, 393240, 1507328, 7, 131096, 1507328, 7, 786445, 1507328, 11, 851981, 1507328, 12, 524301, 1507328, 11, 589837, 1507328, 12, 262157, 1507328, 11, 327693, 1507328, 12, 262168, 1507328, 11, 327704, 1507328, 12, 524312, 1507328, 11, 589848, 1507328, 12, 786456, 1507328, 11, 851992, 1507328, 12, 327695, 2228225, 7, 589839, 2228225, 7, 851983, 2228225, 7, 327702, 2228225, 7, 589846, 2228225, 7, 851990, 2228225, 7, 851982, 2097152, 11, 589838, 2097152, 11, 327694, 2097152, 11, 327703, 2097152, 11, 589847, 2097152, 11, 851991, 2097152, 11, 786444, 2490368, 8, 786457, 2490368, 8, 524313, 2490368, 8, 262169, 2490368, 8, 262156, 2490368, 8, 524300, 2490368, 8, 1048590, 2424832, 8, 1048591, 2424832, 8, 1048598, 2424832, 8, 1048599, 2424832, 8, 1048602, 1441792, 11, 1114138, 1441792, 12, 1048601, 1441792, 11, 1114137, 1441792, 12, 1048592, 2424832, 3, 1048597, 2424832, 3, 720911, 2359296, 3, 786455, 2359296, 3, 262167, 2359296, 3, 262158, 2359296, 3, 458766, 2359296, 3, 458774, 2359296, 3, 720914, 2424832, 3, 458771, 2424832, 3, 196627, 2424832, 3, 1114139, 2818049, 13, 1114140, 2818049, 13, 1114141, 2818049, 13, 1114142, 2818049, 13, 1114143, 2818049, 13, 1114144, 2818049, 13, 1114145, 2818049, 13, 1114146, 2818049, 13, 1114147, 2818049, 13, 1114148, 2818049, 13, 1114149, 2818049, 13, 1114113, 2818049, 13, 1114114, 2818049, 13, 1114115, 2818049, 13, 1114116, 2818049, 13, 1114117, 2818049, 13, 1114118, 2818049, 13, 1114119, 2818049, 13, 1114120, 2818049, 13, 1114121, 2818049, 13, 1114122, 2818049, 13)
 
 [node name="quota_label" type="Label" parent="."]
-offset_left = 667.0
-offset_top = 45.0
-offset_right = 724.0
-offset_bottom = 68.0
-theme_override_colors/font_color = Color(0.309804, 0.658824, 0.345098, 1)
+offset_left = 1019.0
+offset_top = 78.0
+offset_right = 1076.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0, 0.454902, 0, 1)
 text = "Quota: "
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -3198,9 +3133,6 @@ offset_left = 5.0
 offset_top = 408.0
 offset_right = 211.0
 offset_bottom = 471.0
-theme = SubResource("Theme_uxpmx")
-theme_override_fonts/font = ExtResource("7_74ivm")
-theme_override_font_sizes/font_size = 30
 text = "Choose this person"
 
 [node name="Choose2" type="Button" parent="PopUpPeople"]
@@ -3209,9 +3141,6 @@ offset_left = 304.0
 offset_top = 407.0
 offset_right = 510.0
 offset_bottom = 470.0
-theme = SubResource("Theme_o07fg")
-theme_override_fonts/font = ExtResource("7_74ivm")
-theme_override_font_sizes/font_size = 30
 text = "Choose this person"
 
 [node name="DisplayRoom1" type="Button" parent="."]
@@ -3431,7 +3360,6 @@ hframes = 10
 frame = 2
 
 [node name="Person18" type="Sprite2D" parent="Node2D"]
-visible = false
 texture = ExtResource("26_0ug7i")
 hframes = 10
 frame = 2
