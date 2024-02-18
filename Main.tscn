@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmad46vkfo8jg"]
+[gd_scene load_steps=16 format=3 uid="uid://cmad46vkfo8jg"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
 [ext_resource type="Script" path="res://ProgressBar.gd" id="2_wyxhy"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://budr4a53fhbkl" path="res://assets/sky_background.jpg" id="4_kafs0"]
 [ext_resource type="Texture2D" uid="uid://bo62tcux5ul8l" path="res://assets/grass_tileset.png" id="5_cb7xc"]
 [ext_resource type="Texture2D" uid="uid://demxptcl3jkul" path="res://assets/PixelSpaces_Free_Pack/PixelSpaces Free Pack.png" id="5_wbucn"]
+[ext_resource type="Texture2D" uid="uid://q83wx814ab22" path="res://assets/CharacterAnims/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile000.png" id="7_371i6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5heni"]
 texture = ExtResource("5_cb7xc")
@@ -846,6 +847,43 @@ func _on_choose_1_pressed(room:String):
 
 "
 
+[sub_resource type="Animation" id="Animation_ornji"]
+resource_name = "tile0"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 2,
+"values": [2, 9, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_hq36l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8finv"]
+_data = {
+"RESET": SubResource("Animation_hq36l"),
+"tile0": SubResource("Animation_ornji")
+}
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_d1f3b")
 
@@ -1021,6 +1059,19 @@ offset_top = 111.0
 offset_right = 710.0
 offset_bottom = 227.0
 text = "PLS WORK GOD PLSSSSSSSSSSSSSSSSSSSS"
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("7_371i6")
+hframes = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
+process_mode = 3
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_8finv")
+}
 
 [connection signal="pressed" from="GenPerson" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PopUpPeople/Choose1" to="." method="_on_choose_1_pressed"]

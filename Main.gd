@@ -10,6 +10,12 @@ var elapsed_time = 0
 const DURATION = 5 # duration between popups
 var popup_open = false
 
+var moveDirection := 1 # 1 for moving right, -1 for moving left
+var moveAmount := 0.5
+
+var room1_x_min = 330
+var room1_x_max = 480
+
 func _process(delta):
 	#if popup_open == false:
 		#elapsed_time += delta
@@ -18,8 +24,18 @@ func _process(delta):
 		#_on_show_pop_pressed()
 		#print("timer called")
 		#elapsed_time = 0
-	pass
+	
+	
 		
+	if($Node2D/Sprite2D.visible):
+		# Move the sprite by moveAmount pixels in the current direction
+		$Node2D/Sprite2D.position.x += moveAmount * moveDirection
+	
+	# Check if the sprite has reached the desired distance
+		if  room1_x_min >= $Node2D/Sprite2D.position.x || room1_x_max <= $Node2D/Sprite2D.position.x:
+		# If so, change the direction
+			moveDirection *= -1
+			$Node2D/Sprite2D.scale.x *= -1
 		
 	
 
@@ -106,6 +122,8 @@ func _ready():
 	print("Person in room_2:")
 	print(rooms["room_2"].pName)
 	
+	set_process(true)
+	
 var p1 :Person
 var p2 :Person
 func _on_show_pop_pressed():
@@ -185,6 +203,24 @@ func update_averages():
 	# $MoneyLabel.text = str(money)
 
 
+func spawnSprite(person: Person, room: String):
+
+	$Node2D/Sprite2D.visible = true
+	
+	$Node2D/Sprite2D.position.x = 350
+	$Node2D/Sprite2D.position.y = 220
+	
+	$Node2D/Sprite2D.scale = Vector2(2,2)
+	
+	$Node2D/AnimationPlayer.play("tile0")
+	
+
+
+	
+	
+	
+	
+
 func _on_choose_1_pressed():
 	print("s3w4edr5ftgyhuji")
 	store_person_in_room(p1, "room_2")
@@ -193,5 +229,8 @@ func _on_choose_1_pressed():
 	
 
 
+var b2 = Person.new("Bartu", 3, 2, 0.3)
+
 func _on_plsworkgod_pressed():
+	spawnSprite(b2, "room_2")
 	print("HELLOOOOOOOOOOOOOOOO")
