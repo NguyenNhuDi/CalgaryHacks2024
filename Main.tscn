@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://cmad46vkfo8jg"]
+[gd_scene load_steps=64 format=3 uid="uid://cmad46vkfo8jg"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_d1f3b"]
 [ext_resource type="Texture2D" uid="uid://36u22hqis3kt" path="res://assets/taylor_asset_ground.png" id="3_nbdlv"]
 [ext_resource type="Texture2D" uid="uid://cgwerop7j42aj" path="res://assets/taylor_asset.png" id="4_3i6nj"]
 [ext_resource type="Texture2D" uid="uid://bo62tcux5ul8l" path="res://assets/grass_tileset.png" id="5_cb7xc"]
 [ext_resource type="Texture2D" uid="uid://demxptcl3jkul" path="res://assets/PixelSpaces_Free_Pack/PixelSpaces Free Pack.png" id="5_wbucn"]
+[ext_resource type="Texture2D" uid="uid://i1r1iourf0oq" path="res://assets/bg_3.jpg" id="6_l0hab"]
 [ext_resource type="Texture2D" uid="uid://q83wx814ab22" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile000.png" id="7_wujq6"]
 [ext_resource type="Texture2D" uid="uid://7xak8rhvmfd5" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile001.png" id="8_nxy4g"]
 [ext_resource type="Texture2D" uid="uid://dgmufrqlhsxow" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile002.png" id="9_vhyo6"]
@@ -24,7 +25,6 @@
 [ext_resource type="Texture2D" uid="uid://2frfa3c1u4b1" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile017.png" id="24_jj72l"]
 [ext_resource type="Texture2D" uid="uid://t5syjfi6bw0i" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile018.png" id="25_du0nm"]
 [ext_resource type="Texture2D" uid="uid://bqimokmkg3yr1" path="res://assets/Characters/ezgif-3-b2b56d6dad-png-160x16-sprite-png/tile019.png" id="26_0ug7i"]
-[ext_resource type="Texture2D" uid="uid://i1r1iourf0oq" path="res://assets/bg_3.jpg" id="6_l0hab"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5heni"]
 texture = ExtResource("5_cb7xc")

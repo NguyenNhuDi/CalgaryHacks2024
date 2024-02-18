@@ -12,8 +12,9 @@ var happinesses = [0.7, 0.3, 0.4, 0.99, 0.1, 0.12, 0.88, 0.24]
 
 var elapsed_time = 0
 # TODO undo 100s wait time
-const DURATION = 1 # duration between popups
+const DURATION = 10 # duration between popups
 var popup_open = false
+var dayOverWaitTime = 5
 
 var daily_quota = 1000 # can change, plus is updated dynamically in check_actions...????
 
@@ -26,9 +27,6 @@ var room3coord = [340, 485, 478]
 var room4coord = [655, 805, 220]
 var room5coord = [655, 805, 350]
 var room6coord = [655, 805, 478]
-
-var moveDirection := 1 # 1 for moving right, -1 for moving left
-var moveAmount := 0.5
 
 func _process(delta):
 	if popup_open == false: # start timer when the popup is not open
@@ -47,14 +45,8 @@ func _process(delta):
 
 		if(rooms[room] != fPerson):
 			var personInRoom = rooms[room]
-
-			
 			var name_index = names.find(personInRoom.pName)
-			
-			
 			var personSprite = $Node2D.get_child(name_index)
-			
-			
 			
 			var room_number = int(room[-1])
 			var room_x_min: int
@@ -81,10 +73,10 @@ func _process(delta):
 				_:
 					print("Such room dont exist??")
 					
-			personSprite.position.x += moveAmount * moveDirection
+			personSprite.position.x += personInRoom.mVec * personInRoom.mDir
 			
 			if  room_x_min >= personSprite.position.x || room_x_max <= personSprite.position.x:
-				moveDirection *= -1
+				personInRoom.mDir *= -1
 				personSprite.scale.x *= -1
 			
 		
@@ -134,16 +126,6 @@ func spawnSprite(person: Person, room: String):
 	$Node2D/AnimationPlayer.play(tile)
 	
 
-
-
-
-
-
-
-
-
-	
-	
 
 #Returns a list [p1, p2] where p1 and p2 are person objects
 #GDScript doesnt have tuples so i needed to use list of 2.
@@ -200,10 +182,6 @@ func _ready():
 		var rName = "room_%d" % [i+1]
 		rooms[rName] = fPerson
 		
-	var b2 = Person_Obj.new("Bartu", 21, 1000, 0.85)
-	rooms["room_1"] = b2
-		
-	
 	set_process(true)
 	
 var p1 :Person
@@ -289,7 +267,6 @@ func update_averages():
 	
 	
 func check_game_over_state(): # returns treu if game over
-	print(GameState.get_money())
 	if GameState.get_happiness() < 0.2: # temporary game over condition
 		# game ova
 		low_happiness()
@@ -489,7 +466,7 @@ func check_actions_and_switch_scene():
 		
 		if !check_game_over_state():
 			var timer = Timer.new()
-			timer.wait_time = 2
+			timer.wait_time = dayOverWaitTime
 			timer.one_shot = true
 			add_child(timer)
 			# Use Callable for connecting in Godot 4.0
