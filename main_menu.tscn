@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://3v21h4jjpfjh"]
+[gd_scene load_steps=4 format=3 uid="uid://3v21h4jjpfjh"]
 
 [ext_resource type="Script" path="res://main_menu.gd" id="1_qvlyy"]
 [ext_resource type="Texture2D" uid="uid://budr4a53fhbkl" path="res://assets/sky_background.jpg" id="2_ixxbr"]
+[ext_resource type="Texture2D" uid="uid://b5yknp726bpdk" path="res://assets/pixil-frame-0.png" id="3_fi7m4"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -25,6 +26,14 @@ offset_bottom = 343.0
 texture = ExtResource("2_ixxbr")
 expand_mode = 1
 
+[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+layout_mode = 0
+offset_left = 281.0
+offset_top = 50.0
+offset_right = 1173.0
+offset_bottom = 415.0
+texture = ExtResource("3_fi7m4")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -33,9 +42,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -115.0
-offset_top = -61.0
+offset_top = -13.185
 offset_right = 115.0
-offset_bottom = 61.0
+offset_bottom = 108.815
 grow_horizontal = 2
 grow_vertical = 2
 

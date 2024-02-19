@@ -35,6 +35,7 @@ text = "Day Over..."
 
 [node name="NextDay" type="Button" parent="."]
 z_index = 5
+layout_mode = 0
 offset_left = 475.0
 offset_top = 385.0
 offset_right = 702.0
